@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+
+<resources>
+    <string-array name="categories">
+
+        <item>Launcher is enabled</item>
+        <item> Launcher is disabled</item>
+    </string-array>
+    <string-array name="categories_value">
+        <item>On</item>
+        <item>Off</item>
+    </string-array>
+</resources>

@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="name_menu_info">Info app</string>
+    <string name="name_menu_tools">Tools</string>
+    <string name="name_menu_more_app">Play Store</string>
+    <string name="name_menu_xdr">XDR</string>
+    <string name="name_menu_all_quotes">All quotes</string>
+    <string name="name_menu_info_sort_tabs">Сurrencies/Metals</string>
+</resources>

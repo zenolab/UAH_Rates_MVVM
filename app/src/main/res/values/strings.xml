@@ -1,0 +1,78 @@
+<resources>
+    <string name="app_name">UAH Rates</string>
+
+
+    <string name="tab_text_1">Tab 1</string>
+    <string name="tab_text_2">Tab 2</string>
+    <string name="tab_text_3">Tab 3</string>
+    <string name="action_info_menu">Settings</string>
+    <string name="section_format">Hello World from section: %1$d</string>
+
+
+    <string name="navigation_drawer_open">Open navigation drawer</string>
+    <string name="navigation_drawer_close">Close navigation drawer</string>
+    <string name="nav_header_title">UAH Rates</string>
+    <string name="nav_header_subtitle">Quotes</string>
+    <string name="nav_header_desc">Navigation header</string>
+
+
+    <string name="screen_launcher_key">RATE_PREF_KEY</string>
+    <string name="default_movies_categories">popular</string>
+
+    <string name="progress_title">Getting rates</string>
+    <string name="progress_body">Please Wait</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="error1">Not Connection</string>
+    <string name="success">Done!</string>
+    <string name="search_hint">Input tiker</string>
+    <string name="action_search">Sorting</string>
+    <string name="toolbar_title">my_toolbar</string>
+    <string name="informer_menu">Финансовые данные на основе Национального Банка Украины (НБУ)</string>
+    <string name="about_app">В приложении используются данные Национального Банка Украины (НБУ)</string>
+    <string name="about_finance_data">Официальный курс Национального Банка Украины гривни к иностранным валютам и
+        банковским металлам
+    </string>
+    <string name="about_finance_time">Примечание: В текущем дне будет отображаться официальный курс гривни к иностранным
+        валютам, установленный НА ЗАВТРА по схеме:
+
+        1. В 16:00 - отображается только официальный курс гривни к иностранным валютам, который устанавливается 1 раз в
+        месяц.
+
+        2. Между 16:00 и 18:00 - официальный курс, указанный в пункте 1, и официальный курс гривни к доллару США.
+
+        3. После 18:00 - официальные курсы, указаные в п.2, и официальный курс гривны к другим валютам и банковским
+        металлам.
+    </string>
+    <string name="nbu_link">https://bank.gov.ua/control/uk/index</string>
+    <string name="action_info">info</string>
+    <string name="server_picker_dialog_title">dialog informer</string>
+
+    <string name="about_xdr">Специальные права заимствования (СПЗ) — искусственное резервное и платёжное средство,
+        эмитируемое Международным валютным фондом (МВФ).
+        Имеет только безналичную форму в виде записей на банковских счетах.Не является ни валютой,
+        ни долговым обязательством.Это платёжное средство было создано МВФ в 1969 году как дополнение к существующим
+        резервным активам стран-членов.
+        Основная цель создания: преодоление парадокса Триффина в рамках Бреттон-Вудской валютной системы — противоречия
+        между международным характером использования и национальной природой валют.
+        Курс СПЗ публикуется ежедневно и определяется на основе долларовой стоимости корзины из пяти ведущих валют:
+        доллар США,
+        евро, китайский юань, иена и фунт стерлингов.
+    </string>
+    <string name="wiki_xdr">
+        https://ru.wikipedia.org/wiki/%D0%A1%D0%BF%D0%B5%D1%86%D0%B8%D0%B0%D0%BB%D1%8C%D0%BD%D1%8B%D0%B5_%D0%BF%D1%80%D0%B0%D0%B2%D0%B0_%D0%B7%D0%B0%D0%B8%D0%BC%D1%81%D1%82%D0%B2%D0%BE%D0%B2%D0%B0%D0%BD%D0%B8%D1%8F
+    </string>
+    <string name="name_menu_info">Info app</string>
+    <string name="name_menu_tools">Tools</string>
+    <string name="name_menu_more_app">Play Store</string>
+    <string name="name_menu_xdr">XDR</string>
+    <string name="name_menu_all_quotes">All quotes</string>
+    <string name="name_menu_info_sort_tabs">Сurrencies/Metals</string>
+    <string name="title_activity_main2">Main2Activity</string>
+    <string name="informer_app">Информация о приложении</string>
+    <string name="action_informer">Info</string>
+    <string name="title_xdr">Информация о СПЗ (XDR)</string>
+    <string name="name_menu_more_app2">More...</string>
+
+
+</resources>

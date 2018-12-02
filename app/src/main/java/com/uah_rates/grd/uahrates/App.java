@@ -12,13 +12,10 @@ import retrofit2.converter.gson.GsonConverterFactory;
 import java.util.concurrent.TimeUnit;
 
 public class App extends Application {
-
-
    //-------------------------------------------------------------------------------------------------------------------
    public static class CacheResponse {
 
        private static ApiResponse cacheResponse;
-
 
        public static ApiResponse getCacheResponse() {
            return cacheResponse;
@@ -27,7 +24,6 @@ public class App extends Application {
        public static void setCacheResponse(ApiResponse cacheResponse) {
            CacheResponse.cacheResponse = cacheResponse;
        }
-
    }
 
    //-------------------------------------------------------------------------------------------------------------------

@@ -25,16 +25,16 @@ import com.uah_rates.grd.uahrates.ui.screens.XDRFragmentView;
 import com.uah_rates.grd.uahrates.ui.screens.dialog.InfoDialogFragment;
 import com.uah_rates.grd.uahrates.settings.SettingsFragment;
 
-public class MainBaseActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener{
+public final class MainBaseActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener{
 
     private static final String LOG_TAG = new RuntimeException().getStackTrace()[0].getClassName();
     private Fragment fragment = null;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-
 
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
@@ -47,7 +47,6 @@ public class MainBaseActivity extends AppCompatActivity implements NavigationVie
 
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
-
 
     }//End onCreate()
 
@@ -111,7 +110,6 @@ public class MainBaseActivity extends AppCompatActivity implements NavigationVie
 
     }
 
-
     @Override
     protected void onDestroy(){
         super.onDestroy();
@@ -121,6 +119,7 @@ public class MainBaseActivity extends AppCompatActivity implements NavigationVie
     protected void onStop(){
         super.onStop();
         Log.d(LOG_TAG, "onStop");
+
     }
     @Override
     protected void onStart(){
@@ -137,6 +136,7 @@ public class MainBaseActivity extends AppCompatActivity implements NavigationVie
     protected void onResume(){
         super.onResume();
         Log.d(LOG_TAG, "onResume");
+
             mainView();
     }
 

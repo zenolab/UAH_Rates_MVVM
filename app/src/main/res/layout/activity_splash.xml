@@ -25,7 +25,7 @@
         android:layout_marginTop="148dp"
         android:layout_marginEnd="97dp"
         android:layout_marginRight="97dp"
-        android:src="@drawable/img_value"
+        android:src="@drawable/splash_screen"
         app:civ_border_color="#ffffff"
         app:civ_border_width="3dp"
         tools:layout_editor_absoluteX="97dp"
@@ -33,7 +33,7 @@
 
 
     <TextView
-        android:id="@+id/textView3"
+        android:id="@+id/textTitleOfSplash"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@+id/civProfilePic"
@@ -46,6 +46,8 @@
         android:shadowDx="2"
         android:shadowDy="1"
         android:shadowRadius="5"
+
+        android:textAppearance="@style/TextAppearance.AppCompat.Subhead"
 
         android:textSize="48sp"
         android:textStyle="bold"

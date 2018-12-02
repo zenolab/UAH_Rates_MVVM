@@ -3,6 +3,7 @@ package com.uah_rates.grd.uahrates.ui.screens;
 
 import android.app.ProgressDialog;
 import android.arch.lifecycle.ViewModelProviders;
+import android.content.Intent;
 import android.os.Handler;
 import android.support.v4.app.Fragment;
 import android.support.v4.widget.SwipeRefreshLayout;
@@ -13,6 +14,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Toast;
 import com.uah_rates.grd.uahrates.R;
+import com.uah_rates.grd.uahrates.graph.ChartActivity;
 import com.uah_rates.grd.uahrates.ui.adapter.DataAdapter;
 import com.uah_rates.grd.uahrates.ui.adapter.listener.RecyclerTouchListener;
 import com.uah_rates.grd.uahrates.ui.adapter.listener.RecyclerViewClickListener;
@@ -100,11 +102,15 @@ public abstract class BaseRateFragment extends Fragment {
                 recyclerView, new RecyclerViewClickListener() {
             @Override
             public void onClick(View view, final int position) {
-              //  Toast.makeText(getActivity(), "Click "+position , Toast.LENGTH_LONG).show();
+                Toast.makeText(getActivity(), "Click "+position , Toast.LENGTH_LONG).show();
+
+                Intent intent = new Intent(getActivity(),ChartActivity.class);
+                intent.putExtra("rcode", dataAdapter.tickerMap.get(position));
+                startActivity(intent);
             }
             @Override
             public void onLongClick(View view, int position) {
-              //  Toast.makeText(getActivity(), "Long press on position :"+position, Toast.LENGTH_LONG).show();
+                Toast.makeText(getActivity(), "Long press on position :"+position, Toast.LENGTH_LONG).show();
             }
         }));
     }

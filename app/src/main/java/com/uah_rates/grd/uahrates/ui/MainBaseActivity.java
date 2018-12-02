@@ -17,6 +17,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 
 import com.uah_rates.grd.uahrates.R;
+import com.uah_rates.grd.uahrates.graph.Model;
 import com.uah_rates.grd.uahrates.ui.pager.HostFragment;
 import com.uah_rates.grd.uahrates.ui.screens.AllRatesFragmentView;
 import com.uah_rates.grd.uahrates.ui.screens.InfoAppFragmentView;
@@ -47,6 +48,8 @@ public final class MainBaseActivity extends AppCompatActivity implements Navigat
 
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
+
+        Model model = new Model(this);
 
     }//End onCreate()
 

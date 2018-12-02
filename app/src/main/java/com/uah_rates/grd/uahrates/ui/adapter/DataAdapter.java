@@ -10,7 +10,9 @@ import com.uah_rates.grd.uahrates.ui.adapter.listener.RecyclerViewClickListener;
 import com.uah_rates.grd.uahrates.model.pojo.Rate;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 
 public class DataAdapter extends RecyclerView.Adapter<DataAdapter.Holder>{
@@ -21,6 +23,7 @@ public class DataAdapter extends RecyclerView.Adapter<DataAdapter.Holder>{
     private List<Rate> tempList;
     private List<Rate> ratesListSorted;
     private List<Rate> ratesListSeached;
+    public Map<Integer,Integer> tickerMap;
     private RecyclerViewClickListener mListener;
 
     private  int template ;
@@ -33,6 +36,9 @@ public class DataAdapter extends RecyclerView.Adapter<DataAdapter.Holder>{
         this.tempList = new ArrayList<>();
         this.ratesListSorted = new ArrayList<>();
         this.ratesListSeached = new ArrayList<>();
+
+        tickerMap = null;
+        tickerMap = new HashMap<>();
     }
 
     @Override
@@ -48,6 +54,10 @@ public class DataAdapter extends RecyclerView.Adapter<DataAdapter.Holder>{
     @Override
     public void onBindViewHolder(Holder holder, final int position) {
         final Rate rates = ratesListSorted.get(position);
+
+       // position = 1, tiker =retes.getTxt();
+
+        tickerMap.put(position,rates.getR030());
 
         holder.mTextViewTitle.setText(rates.getTxt());
         holder.mTextViewСс.setText(rates.getCc());

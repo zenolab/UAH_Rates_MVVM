@@ -6,6 +6,7 @@ import android.content.SharedPreferences;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
+import android.widget.Toast;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 import com.uah_chart.zenolab.chart.LineChartView;
@@ -57,6 +58,19 @@ public class ChartActivity extends AppCompatActivity {
     }
 
     private float[] getChartPoints() {
+
+      // return new float [] {0,0,0,0,0,0,0,0,0,0};
+       // return new float [] {1,0,1,0,1,0,1,0,1,0};
+
+
+       // return new float [] {0,0,0,0,0,0,0,0,0,1}; //wrong
+       // return new float [] {0,0,0,0,0,0,0,0,0,3}; //ok
+       // return new float [] {999999.34567f,999999,999999,999999,999999,999999,999999,999999,999999,9.99999f}; //ok
+          // return new float [] {0,0,0,0,0,0,0,0,9,0};
+       // return new float [] {0,0,0,0,0,0,0,0,0,0};
+       // return new float [] {0,0,3,4,5,6,7,8,9,0};
+       // return new float[] { 10, 12, 7, 14, 15, 19, 13, 2, 10, 13, 13, 10, 15, 14 };
+
         return chartRange;
     }
 
@@ -108,21 +122,38 @@ public class ChartActivity extends AppCompatActivity {
     }
 
     public void showOutput(LinkedList<Float> valuesChart){
-        Iterator lit = valuesChart.descendingIterator();
 
-        System.out.println("Backward Iterations");
-        Log.d(LOG_TAG, "========================= <linkedList > ===========Output===============");
-        int step =0;
-        // Caused by: java.util.NoSuchElementException
-        while(lit.hasNext()){
+        //temporal resolve for interator NoSuchElementException (several item)
+        try {
+            Iterator lit = valuesChart.descendingIterator();
 
-            chartRange[step] =(float) lit.next();
-            step=step+1;
+            System.out.println("Backward Iterations");
+            Log.d(LOG_TAG, "========================= <linkedList > ===========Output===============");
+            int step = 0;
+            // Caused by: java.util.NoSuchElementException
+            // java.lang.ArrayIndexOutOfBoundsException: length=10; index=10
+//        while(lit.hasNext()){
+//
+//            chartRange[step] =(float) lit.next();
+//            step=step+1;
+//        }
+
+            for (int i = 0; i < chartRange.length; i++) {
+                System.out.println(chartRange[i]);
+                Log.d(LOG_TAG, "========================= <Array > =====last ticket " + selected + " ======contain=============== " + chartRange[i]);
+
+                chartRange[step] = (float) lit.next(); // java.util.NoSuchElementException
+                step = step + 1;
+            }
+        }catch (java.util.NoSuchElementException exception){
+            Log.d(LOG_TAG, "===== java.util.NoSuchElementException -- LinkedList<Float>  Iterator is null======");
+
+            Toast.makeText(this, " К сожалению нет точных данных !", Toast.LENGTH_LONG).show();
         }
 
-        for (int i = 0; i< chartRange.length; i++) {
-            System.out.println(chartRange[i]);
-            Log.d(LOG_TAG, "========================= <Array > ===========contain=============== "+ chartRange[i]);
+        //RUB=643
+        if(selected==643||selected==960){
+            Toast.makeText(this, " К сожалению нет корректных данных по данному тикеру!", Toast.LENGTH_LONG).show();
         }
     }
 

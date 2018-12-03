@@ -37,7 +37,6 @@ public abstract class BaseRateFragment extends Fragment {
 
     protected List<Rate> searchedList = new ArrayList<>();
 
-
     protected abstract void initRatesListView(View view);
 
 
@@ -102,7 +101,7 @@ public abstract class BaseRateFragment extends Fragment {
                 recyclerView, new RecyclerViewClickListener() {
             @Override
             public void onClick(View view, final int position) {
-                Toast.makeText(getActivity(), "Click "+position , Toast.LENGTH_LONG).show();
+              //  Toast.makeText(getActivity(), "Click "+position , Toast.LENGTH_LONG).show();
 
                 Intent intent = new Intent(getActivity(),ChartActivity.class);
                 intent.putExtra("rcode", dataAdapter.tickerMap.get(position));
@@ -110,7 +109,11 @@ public abstract class BaseRateFragment extends Fragment {
             }
             @Override
             public void onLongClick(View view, int position) {
-                Toast.makeText(getActivity(), "Long press on position :"+position, Toast.LENGTH_LONG).show();
+              //  Toast.makeText(getActivity(), "Long press on position :"+position, Toast.LENGTH_LONG).show();
+
+                Intent intent = new Intent(getActivity(),ChartActivity.class);
+                intent.putExtra("rcode", dataAdapter.tickerMap.get(position));
+                startActivity(intent);
             }
         }));
     }
@@ -119,12 +122,15 @@ public abstract class BaseRateFragment extends Fragment {
         viewModel.loadRates();
 
         viewModel.getApiResponse().observe(this, apiResponse -> {
-            Log.e(LOG_TAG, "Observe called");
+            Log.e(LOG_TAG, "Observe called ");
             if (apiResponse.getError() != null) {
+                Log.e(LOG_TAG, "Answer is unsuccessfully");
                 handleError(apiResponse.getError());
             } else {
-
+                Log.e(LOG_TAG, "Answer is successfully");
                 handleResponse(apiResponse.getListRates( category));
+                //control check if there is an old cached data from the android system
+                setProgress(false);
             }
         });
 

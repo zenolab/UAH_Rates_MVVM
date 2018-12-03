@@ -21,6 +21,9 @@ class SplashActivity : AppCompatActivity() {
     private var SPLASH_DELAY: Long = 2000
 
 
+    private val ANIMATION_DURATION:Long = 1900;
+
+
    internal val mRunnable: Runnable = Runnable {
 
         if (!isFinishing) {
@@ -35,8 +38,10 @@ class SplashActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
      //   setContentView(R.layout.activity_splash)
         loadPref();
+
         mDelayHandler = Handler()
         mDelayHandler!!.postDelayed(mRunnable, SPLASH_DELAY)
+
     }
 
     private fun loadPref() {
@@ -48,8 +53,41 @@ class SplashActivity : AppCompatActivity() {
             SPLASH_DELAY = 0
         } else {
             setContentView(R.layout.activity_splash)
+            startAnimation();
         }
     }
+
+    private fun startAnimation(){
+
+        // Intro animation configuration.
+        val valueAnimator = ValueAnimator.ofFloat(0f, 1f)
+        valueAnimator.addUpdateListener {
+            val value = it.animatedValue as Float
+            textTitleOfSplash.scaleX = value
+            textTitleOfSplash.scaleY = value
+        }
+        valueAnimator.interpolator = BounceInterpolator()
+        valueAnimator.duration = ANIMATION_DURATION
+
+        // Set animator listener.
+        val intent = Intent(this,  MainBaseActivity::class.java)
+        valueAnimator.addListener(object : Animator.AnimatorListener {
+            override fun onAnimationRepeat(p0: Animator?) {}
+
+            override fun onAnimationEnd(p0: Animator?) {
+                // Navigate to main activity on navigation end.
+//                startActivity(intent)
+//                finish()
+                mDelayHandler = Handler()
+                mDelayHandler!!.postDelayed(mRunnable, SPLASH_DELAY)
+            }
+            override fun onAnimationCancel(p0: Animator?) {}
+            override fun onAnimationStart(p0: Animator?) {}
+        })
+        // Start animation.
+        valueAnimator.start()
+    }
+
 
     public override fun onDestroy() {
 

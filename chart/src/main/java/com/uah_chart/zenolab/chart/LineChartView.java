@@ -20,8 +20,8 @@ public class LineChartView extends View {
     int years = 10;
 
 
-    private static final int MIN_LINES = 3;
-    private static final int MAX_LINES = 10;
+    private static final float MIN_LINES = 0.0f;
+    private static final float MAX_LINES = 10;
     private static final int[] DISTANCES = { 1, 2, 5 }; //distance for horizontal lines
 
     //String datesCalculate [] = new String[] { "2008/10/25", "2009/10/25", "2010/10/25", "2011/10/25",  "2012/10/25","2013/10/25","2014/10/25","2015/10/25","2016/10/25","2017/10/25","2018/10/25" };
@@ -183,14 +183,14 @@ public class LineChartView extends View {
         int distance;
         int distanceIndex = 0;
         int distanceMultiplier = 1;
-        int numberOfLines = MIN_LINES;
+        float numberOfLines = MIN_LINES;
 
         do {
             //For first index element
             distance = DISTANCES[distanceIndex] * distanceMultiplier;
             //Not working with api 23. FloatMath is deprecated. use Math instead. #366
             // numberOfLines = (int) FloatMath.ceil(maxValue / distance); - дает целое число с нулевой дробной частью, ближайшее к числу аргумента справа, другими словами — округляет дробь
-            numberOfLines = (int) Math.ceil(maxValue / distance); // получить колистве линий исходня из максимального значения
+            numberOfLines = (float) Math.ceil(maxValue / distance); // получить колистве линий исходня из максимального значения
 
             distanceIndex++;
             if (distanceIndex == DISTANCES.length) {

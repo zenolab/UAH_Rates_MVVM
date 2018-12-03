@@ -2,12 +2,12 @@
 
 
 <resources>
-    <string-array name="categories">
+    <string-array name="launcher">
 
         <item>Launcher is enabled</item>
         <item> Launcher is disabled</item>
     </string-array>
-    <string-array name="categories_value">
+    <string-array name="launcher_value">
         <item>On</item>
         <item>Off</item>
     </string-array>

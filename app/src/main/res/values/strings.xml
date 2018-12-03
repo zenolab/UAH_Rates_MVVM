@@ -17,7 +17,7 @@
 
 
     <string name="screen_launcher_key">RATE_PREF_KEY</string>
-    <string name="default_movies_categories">popular</string>
+    <!--<string name="default_movies_categories">popular</string>-->
 
     <string name="progress_title">Getting rates</string>
     <string name="progress_body">Please Wait</string>

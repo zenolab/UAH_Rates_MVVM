@@ -85,7 +85,7 @@ public class Model {
     public List<Rate> getRatesС() {
 
         //****************************************
-        showHistory(getHashMap(SP_KEY));
+       // showHistory(getHashMap(SP_KEY));
         //****************************************
 
 
@@ -105,7 +105,7 @@ public class Model {
 
         //---------------------------------------
         //****************************************
-       //  getRepository();
+        // getRepository();
         //****************************************
 
         int a = 1;

@@ -71,16 +71,22 @@ public final class MainBaseActivity extends AppCompatActivity implements Navigat
 
         if (id == R.id.nav_camera) {
             fragment = new HostFragment();
+            setTitle("Currencies/Metals");
         } else if (id == R.id.nav_gallery) {
             fragment = new AllRatesFragmentView();
+            setTitle("All quotes");
         } else if (id == R.id.nav_slideshow) {
              fragment = new XDRFragmentView();
             // fragment = new BondFragment();
+            setTitle("XDR");
         } else if (id == R.id.nav_manage) {
             fragment = new SettingsFragment();
+            setTitle("Menu");
         } else if (id == R.id.nav_share) {
             fragment = new InfoAppFragmentView();
+            setTitle("Info");
         } else if (id == R.id.nav_send) {
+            setTitle("Google Play");
             fragment = new PlayStoreFragmentView();
         }
 

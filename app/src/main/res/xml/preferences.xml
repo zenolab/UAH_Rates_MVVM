@@ -4,10 +4,10 @@
 
     <ListPreference
         android:defaultValue="popular"
-        android:entries="@array/categories"
-        android:entryValues="@array/categories_value"
-        android:summary="Select categories of movies"
-        android:title="Categories"
+        android:entries="@array/launcher"
+        android:entryValues="@array/launcher_value"
+        android:summary="Select options "
+        android:title="Launcher"
         android:key="@string/screen_launcher_key" />
 
 

@@ -1,15 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
 
-
     <ListPreference
         android:defaultValue="popular"
-        android:entries="@array/categories"
-        android:entryValues="@array/categories_value"
-        android:summary="Select categories of movies"
-        android:title="Categories"
+        android:entries="@array/launcher"
+        android:entryValues="@array/launcher_value"
+        android:summary="Press to select options"
+        android:title="Launcher"
         android:key="@string/screen_launcher_key" />
-
-
 
 </PreferenceScreen>

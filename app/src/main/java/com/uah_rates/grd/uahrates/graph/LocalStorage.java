@@ -3,13 +3,11 @@ package com.uah_rates.grd.uahrates.graph;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.support.annotation.NonNull;
-import android.support.v4.util.ArrayMap;
 import android.util.Log;
-import android.util.SparseArray;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 import com.uah_rates.grd.uahrates.App;
-import com.uah_rates.grd.uahrates.api.RetrofitCallRateService;
+import com.uah_rates.grd.uahrates.api.ApiService;
 import com.uah_rates.grd.uahrates.model.pojo.Rate;
 import io.reactivex.Observable;
 import io.reactivex.android.schedulers.AndroidSchedulers;
@@ -21,9 +19,12 @@ import java.util.*;
 import static android.content.Context.MODE_PRIVATE;
 
 
-public class Model {
+public class LocalStorage {
 
     private static final String LOG_TAG = new RuntimeException().getStackTrace()[0].getClassName();
+
+    final static String KEY_VALUE = "MyVariables";
+    public final static String SP_KEY = "CHART_DATA";
 
     private Context context;
 
@@ -52,12 +53,12 @@ public class Model {
     private Map<Integer, io.reactivex.Observable<List<Rate>>> hashMap10 = new HashMap<Integer, io.reactivex.Observable<List<Rate>>>();
     private List<Observable<List<Rate>>> observables;
 
-    private RetrofitCallRateService service;
+    private ApiService service;
 
-    public final static String SP_KEY = "CHART_DATA";
+
 
     //------------------------Constructor--------------------------------------
-    public Model(Context context) {
+    public LocalStorage(Context context) {
 
         this.context = context;
 
@@ -65,7 +66,7 @@ public class Model {
 
         service = App.RetrofitClientInstance
                 .getRetrofitInstance()
-                .create(RetrofitCallRateService.class);
+                .create(ApiService.class);
 
         observables = null;
         observables = new ArrayList<Observable<List<Rate>>>();
@@ -84,11 +85,6 @@ public class Model {
     //---------------------------------------------------------------
     public List<Rate> getRatesС() {
 
-        //****************************************
-       // showHistory(getHashMap(SP_KEY));
-        //****************************************
-
-
         int baseDate = getCurrentDate();
         int countdownStep = 10_000;//1 year
 
@@ -105,7 +101,11 @@ public class Model {
 
         //---------------------------------------
         //****************************************
-        // getRepository();
+         getRepository();
+        //****************************************
+
+        //******************test**********************
+        showHistory(getHashMap(SP_KEY));
         //****************************************
 
         int a = 1;
@@ -152,6 +152,8 @@ public class Model {
 //                        // errorThrowable -> handleResultsThrowable(errorThrowable)
 //                );
         //------------------------------------------------------------------------------------------
+        //Метод concat() принимает несколько «наблюдаемых(Observable)» данных и присоединяет их к последовательности.
+        //Порядок исходных «наблюдаемых» в concat() данных, имеют значения, и их можно проверить одно за другим.
         Observable.concat(Observable.fromIterable(observables))
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
@@ -179,9 +181,13 @@ public class Model {
                     @Override
                     public void onComplete() {
 
-                        myResult(linkedHashMap);
+                       // myResult(linkedHashMap);
+                        saveHashMap(SP_KEY, linkedHashMap);
                     }
                 });
+
+        Log.d(LOG_TAG, "linkedHashMap.size " + linkedHashMap.size());
+        Log.d(LOG_TAG, "linkedHashMap.size " + linkedHashMap.size());
 
     }
 
@@ -189,8 +195,8 @@ public class Model {
 
         saveHashMap(SP_KEY, linkedHashMap);
         // saveHashMap(SP_KEY, null);  //CLEAR STORAGE
-        temperList = null;
-        showHistory(linkedHashMap);
+        temperList.clear();
+      //  showHistory(linkedHashMap);
 
         Log.e(LOG_TAG, "{}{}{}{}{}{}{}{}{}{}{}{}{}{}{}{}{}{}{}{}{}{}{}{}{}{}{}{}{}{} ");
         for (Float value : valueList) {
@@ -267,10 +273,10 @@ public class Model {
     public void saveHashMap(String key, Object obj) {
         // getActivity().getApplicationContext().getSharedPreferences("MyVariables", Context.MODE_PRIVATE);
         // SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences("MyVariables", Context.MODE_PRIVATE);
-        SharedPreferences prefs = context.getApplicationContext().getSharedPreferences("MyVariables", MODE_PRIVATE);
+        SharedPreferences prefs = context.getApplicationContext().getSharedPreferences(KEY_VALUE, MODE_PRIVATE);
         SharedPreferences.Editor editor = prefs.edit();
         Gson gson = new Gson();
-        String json = gson.toJson(obj);
+        String json = gson.toJson((LinkedHashMap)obj);
         editor.putString(key, json);
         editor.apply();     // This line is IMPORTANT !!!
     }
@@ -278,29 +284,29 @@ public class Model {
 
     public LinkedHashMap<Integer, List<Rate>> getHashMap(String key) {
         // SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(this);
-        SharedPreferences prefs = context.getApplicationContext().getSharedPreferences("MyVariables", MODE_PRIVATE);
+        SharedPreferences prefs = context.getApplicationContext().getSharedPreferences(KEY_VALUE, MODE_PRIVATE);
         Gson gson = new Gson();
         String json = prefs.getString(key, "");
         // Uses Reflection api for instantiate anyone(whatever)  object in runtime  from GSON
         // TypeToken -Заставляет клиентов создавать подкласс этого класса, который позволяет извлекать информацию о типе даже во время выполнения.
         // TypeToken - Создает литерал (фиксированное значение) нового типа. Производные, представляемые классом из типа
         // Клиенты создают пустой подкласс. Это создает тип в иерархии типов анонимного класса,
-        // чтобы можно было его восстановить во время выполнения, несмотря на стирание.
+        // чтобы можно было его восстановить во время выполнения, несмотря на стирание Generic.
         // Где ожидается имя типа.
         // new TypeToken<ArrayList<T>>()
         // public class TypeToken<T>
         java.lang.reflect.Type type = new TypeToken<LinkedHashMap<Integer, List<Rate>>>() {
         }.getType();
-        LinkedHashMap<Integer, List<Rate>> obj = gson.fromJson(json, type);
+        LinkedHashMap<Integer, List<Rate>> listLinkedHashMap = gson.fromJson(json, type);
 
-        if(obj ==null){
-            Log.d(LOG_TAG, "========================= <linkedHashMap > =>>>>>>>> obj NULL <<<<<<======================== " +obj);
+        if(listLinkedHashMap ==null){
+            Log.d(LOG_TAG, "========================= <linkedHashMap > =>>>>>>>> obj NULL <<<<<<======================== " +listLinkedHashMap);
         }else {
-            Log.d(LOG_TAG, "========================= <linkedHashMap > ==1000000000======================== " + obj);
+            Log.d(LOG_TAG, "========================= <linkedHashMap > ==1000000000======================== " + listLinkedHashMap);
         }
 
 
-        return obj;
+        return listLinkedHashMap;
     }
 
 

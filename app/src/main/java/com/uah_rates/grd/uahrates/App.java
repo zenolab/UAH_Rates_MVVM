@@ -13,6 +13,9 @@ import retrofit2.converter.gson.GsonConverterFactory;
 import java.util.concurrent.TimeUnit;
 
 public class App extends Application {
+
+    final static String sp_key = "CHART_DATA";
+
    //-------------------------------------------------------------------------------------------------------------------
    public static class CacheResponse {
 

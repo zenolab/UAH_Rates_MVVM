@@ -25,6 +25,8 @@ public class RatesViewModel extends ViewModel {
         this.apiResponseMediatorLiveData = new MediatorLiveData<>();
         this.ratesRepository = new RateRepositoryImpl();
 
+        Log.wtf("TTT", "we are here");
+
     }
 
     @NonNull
@@ -33,7 +35,6 @@ public class RatesViewModel extends ViewModel {
     }
 
     public void loadRates() {
-
         ratesSource = ratesRepository.getRates();
         apiResponseMediatorLiveData.addSource(
                 // Returns true if this LiveData has active observers.

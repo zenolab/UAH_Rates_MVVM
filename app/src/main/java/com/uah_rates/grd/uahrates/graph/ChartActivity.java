@@ -75,29 +75,13 @@ public class ChartActivity extends AppCompatActivity {
     }
 
     //=====================Load data===========================
-
-    //-------------------------------------------------------
-    public LinkedHashMap<Integer, List<Rate>> getHashMap(String key) {
-        SharedPreferences prefs = applicationContext.getSharedPreferences("MyVariables", MODE_PRIVATE);
-        Gson gson = new Gson();
-        String json = prefs.getString(key, "");
-        java.lang.reflect.Type type = new TypeToken<LinkedHashMap<Integer, List<Rate>>>() {
-        }.getType();
-        LinkedHashMap<Integer, List<Rate>> obj = gson.fromJson(json, type);
-        if(obj ==null){
-            Log.d(LOG_TAG, "========================= <linkedHashMap > =>>>>>>>> obj NULL <<<<<<======================== " +obj);
-        }else {
-            Log.d(LOG_TAG, "========================= <linkedHashMap > ==1000000000======================== " + obj);
-        }
-        return obj;
-    }
-
-    //-------------------------------------------------------
     //private void showHistory(LinkedHashMap<Integer,List<Rate>> linkedHashMap) {
     private void showHistory(Map<Integer,List<Rate>> linkedHashMap) {
 
         Log.d(LOG_TAG, "========================= <linkedHashMap > ========================== " +linkedHashMap);
 
+        // Caused by: java.lang.NullPointerException: Attempt to invoke interface method 'java.util.Set java.util.Map.entrySet()' on a null object reference
+        // (16:00-18:00)
         for (Map.Entry<Integer, List<Rate>> entry : linkedHashMap.entrySet()) {
 //                            System.out.println(entry.getKey()+" "+entry.getValue());
             Log.d(LOG_TAG, " *** linkedHashMap @-- Map.Entry - это ключ и его значение, объединенное в один класс.  --@********* "
@@ -121,6 +105,39 @@ public class ChartActivity extends AppCompatActivity {
         showOutput(outputList);
     }
 
+    //-------------------------------------------------------
+    public LinkedHashMap<Integer, List<Rate>> getHashMap(String key) {
+        SharedPreferences prefs = applicationContext.getSharedPreferences("MyVariables", MODE_PRIVATE);
+        Gson gson = new Gson();
+        String json = prefs.getString(key, "");
+
+       // TypeToken<T>. С его помощью мы можем получить нужный нам параметризованный тип
+        // https://habr.com/ru/company/naumen/blog/228279/
+        //TypeToken - Заставляет клиентов создавать подкласс этого класса,
+        // который позволяет извлекать информацию о типе даже во время выполнения.
+        /**
+        Создает новый тип литерала. Извлекает представленный класс из типа
+    * параметр.
+    *
+    * <p> Клиенты создают пустой анонимный подкласс. При этом встраивает тип
+    * параметр в иерархии типов анонимного класса, чтобы мы могли восстановить его
+    * во время выполнения несмотря на стирание.
+
+         */
+        java.lang.reflect.Type type = new TypeToken<LinkedHashMap<Integer, List<Rate>>>() {
+        }.getType();
+        LinkedHashMap<Integer, List<Rate>> obj = gson.fromJson(json, type);
+        if(obj ==null){
+            Log.d(LOG_TAG, "========================= <linkedHashMap > =>>>>>>>> obj NULL <<<<<<======================== " +obj);
+        }else {
+            Log.d(LOG_TAG, "========================= <linkedHashMap > ==1000000000======================== " + obj);
+        }
+        return obj;
+    }
+
+    //-------------------------------------------------------
+
+
     public void showOutput(LinkedList<Float> valuesChart){
 
         //temporal resolve for interator NoSuchElementException (several item)
@@ -132,19 +149,19 @@ public class ChartActivity extends AppCompatActivity {
             int step = 0;
             // Caused by: java.util.NoSuchElementException
             // java.lang.ArrayIndexOutOfBoundsException: length=10; index=10
-//        while(lit.hasNext()){
+        while(lit.hasNext()){
+
+            chartRange[step] =(float) lit.next();
+            step=step+1;
+        }
+
+//            for (int i = 0; i < chartRange.length; i++) {
+//                System.out.println(chartRange[i]);
+//                Log.d(LOG_TAG, "========================= <Array > =====last ticket " + selected + " ======contain=============== " + chartRange[i]);
 //
-//            chartRange[step] =(float) lit.next();
-//            step=step+1;
-//        }
-
-            for (int i = 0; i < chartRange.length; i++) {
-                System.out.println(chartRange[i]);
-                Log.d(LOG_TAG, "========================= <Array > =====last ticket " + selected + " ======contain=============== " + chartRange[i]);
-
-                chartRange[step] = (float) lit.next(); // java.util.NoSuchElementException
-                step = step + 1;
-            }
+//                chartRange[step] = (float) lit.next(); // java.util.NoSuchElementException
+//                step = step + 1;
+//            }
         }catch (java.util.NoSuchElementException exception){
             Log.d(LOG_TAG, "===== java.util.NoSuchElementException -- LinkedList<Float>  Iterator is null======");
 

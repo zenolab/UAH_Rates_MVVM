@@ -5,6 +5,7 @@ import android.app.ProgressDialog;
 import android.arch.lifecycle.ViewModelProviders;
 import android.content.Intent;
 import android.os.Handler;
+import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.DefaultItemAnimator;
@@ -48,6 +49,13 @@ public abstract class BaseRateFragment extends Fragment {
 
     }
 
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+
+        //for super crash
+        Log.wtf("TTT", "bla bla bla");
+    }
 
     //-------------------------------------Swipe------------------------------------------------------------------------
     protected void setupSwipeRefresh(View rootView,String category) {
@@ -56,7 +64,7 @@ public abstract class BaseRateFragment extends Fragment {
             @Override
             public void onRefresh() {
                 mSwipeRefreshLayout.setRefreshing(true);
-                ( new Handler()).postDelayed(new Runnable() {
+                new Handler().postDelayed(new Runnable() {
 
                     @Override
                     public void run() {
@@ -118,10 +126,11 @@ public abstract class BaseRateFragment extends Fragment {
         }));
     }
     //------------------------------------------------------------------------------------------------------------------
+    @Nullable
     protected void getData(RatesViewModel viewModel,String category) {
         viewModel.loadRates();
 
-        viewModel.getApiResponse().observe(this, apiResponse -> {
+        viewModel.getApiResponse().observe( getActivity(), apiResponse -> {
             Log.e(LOG_TAG, "Observe called ");
             if (apiResponse.getError() != null) {
                 Log.e(LOG_TAG, "Answer is unsuccessfully");

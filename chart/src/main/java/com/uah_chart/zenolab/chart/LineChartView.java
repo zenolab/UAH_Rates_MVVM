@@ -22,24 +22,24 @@ public class LineChartView extends View {
 
     private static final float MIN_LINES = 0.0f;
     private static final float MAX_LINES = 10;
-    private static final int[] DISTANCES = { 1, 2, 5 }; //distance for horizontal lines
+    private static final int[] DISTANCES = {1, 2, 5}; //distance for horizontal lines
 
     //String datesCalculate [] = new String[] { "2008/10/25", "2009/10/25", "2010/10/25", "2011/10/25",  "2012/10/25","2013/10/25","2014/10/25","2015/10/25","2016/10/25","2017/10/25","2018/10/25" };
-   // String datesCalculate [] = new String[] { "2009", "2010", "2011",  "2012","2013","2014","2015","2016","2017","2018" };
-   // int datesCalculate [] = new int[] { 2009, 2010, 2011,  2012,2013,2014,2015,2016,2017,2018 };
+    // String datesCalculate [] = new String[] { "2009", "2010", "2011",  "2012","2013","2014","2015","2016","2017","2018" };
+    // int datesCalculate [] = new int[] { 2009, 2010, 2011,  2012,2013,2014,2015,2016,2017,2018 };
     int datesCalculate[] = new int[10];
-   // int datesReverse [] = new int[10];
+    // int datesReverse [] = new int[10];
 
 
-
-    private float[] datapoints = new float[] {};
+    private float[] datapoints = new float[]{};
     private Paint paint = new Paint();
 
     public void setChartData(float[] datapoints) {
         this.datapoints = datapoints.clone();
     }
 
-    /** Это конструктор должен объязательно иметь определенную View внутри xml layout! - иначе приложение failed !!!
+    /**
+     * Это конструктор должен объязательно иметь определенную View внутри xml layout! - иначе приложение failed !!!
      * Если inflate берет разметку не и з кода ,а из xml ,
      * то конструктор принимает всегда два параметра Context и AttributeSet !!!
      */
@@ -66,7 +66,7 @@ public class LineChartView extends View {
 
     public static void reverse(int[] array) {
         if (array == null) {
-            return ;
+            return;
         }
         int i = 0;
         int j = array.length - 1;
@@ -91,7 +91,7 @@ public class LineChartView extends View {
 
     }
 
-   // Arrays.sort(datesCalculate, Collections.reverseOrder());
+    // Arrays.sort(datesCalculate, Collections.reverseOrder());
 
     /*
     @Override
@@ -118,7 +118,7 @@ public class LineChartView extends View {
         drawBackground(canvas, maxValue);
     }
 
-    private void drawBackground(Canvas canvas,float maxValue) {
+    private void drawBackground(Canvas canvas, float maxValue) {
 
         int range = getLineDistance(maxValue);
         paint.setStyle(Paint.Style.FILL);
@@ -136,7 +136,7 @@ public class LineChartView extends View {
 
             // turn on anti alias again for the text
             paint.setAntiAlias(true);
-            canvas.drawText(String.valueOf(y), getPaddingLeft()-35, yPos - 12, paint);
+            canvas.drawText(String.valueOf(y), getPaddingLeft() - 35, yPos - 12, paint);
 
         }
 
@@ -144,7 +144,7 @@ public class LineChartView extends View {
 
             final int xPos = (int) getXPos(x);
 
-            float startX,stopX,startY,stopY;
+            float startX, stopX, startY, stopY;
 
             float width = getWidth();
 
@@ -172,7 +172,7 @@ public class LineChartView extends View {
             // turn on anti alias again for the text
             paint.setTextSize(16);
             paint.setAntiAlias(true);
-            canvas.drawText(String.valueOf(datesCalculate[x]), stopX+6, stopY - 12, paint);
+            canvas.drawText(String.valueOf(datesCalculate[x]), stopX + 6, stopY - 12, paint);
 
         }
 
@@ -205,12 +205,13 @@ public class LineChartView extends View {
     }
 
     //------------------------draw------------------------------------------------------------------
+
     /**
-     конструируем объект path, используя созданный ранее метод getYPos().
-     Также там используется метод getXPos(), который работает аналогичным образом,
-     только не инвертирует значения.
-     Создание Path начинается с инициализации начальной точкой.
-     Далее мы продлеваем path, добавляя следующие точки.
+     * конструируем объект path, используя созданный ранее метод getYPos().
+     * Также там используется метод getXPos(), который работает аналогичным образом,
+     * только не инвертирует значения.
+     * Создание Path начинается с инициализации начальной точкой.
+     * Далее мы продлеваем path, добавляя следующие точки.
      */
     private void drawLineChart(Canvas canvas) {
         // Path  -рисовать линии между точками
@@ -233,8 +234,9 @@ public class LineChartView extends View {
     }
 
     //------------------ calculate max value -------------------------------------------------------
+
     /**
-     *Функция для вычисления максимального значения Y (линии графика) перебирает массив и находит максимум.
+     * Функция для вычисления максимального значения Y (линии графика) перебирает массив и находит максимум.
      */
     private float getYPos(float value) {
         float height = getHeight() - getPaddingTop() - getPaddingBottom();
@@ -255,7 +257,9 @@ public class LineChartView extends View {
     }
 
 
-    /** Для X координаты ( линии графика)- функция масштабирования */
+    /**
+     * Для X координаты ( линии графика)- функция масштабирования
+     */
     private float getXPos(float value) {
         float width = getWidth() - getPaddingLeft() - getPaddingRight();
         float maxValue = datapoints.length - 1;

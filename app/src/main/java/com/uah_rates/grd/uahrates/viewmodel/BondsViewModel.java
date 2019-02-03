@@ -11,7 +11,7 @@ import java.util.List;
 
 import com.uah_rates.grd.uahrates.App;
 import com.uah_rates.grd.uahrates.model.pojo.Bond;
-import com.uah_rates.grd.uahrates.api.RetrofitCallRateService;
+import com.uah_rates.grd.uahrates.api.ApiService;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -43,9 +43,9 @@ public class BondsViewModel extends ViewModel {
      */
     private void loadRates() {
 
-        RetrofitCallRateService service = App.RetrofitClientInstance
+        ApiService service = App.RetrofitClientInstance
                 .getRetrofitInstance()
-                .create(RetrofitCallRateService.class);
+                .create(ApiService.class);
 
 
         Call<List<Bond>> call = service.fetchBonds();

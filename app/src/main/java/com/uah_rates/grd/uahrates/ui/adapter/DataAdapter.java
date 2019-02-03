@@ -53,17 +53,10 @@ public class DataAdapter extends RecyclerView.Adapter<DataAdapter.Holder>{
 
     @Override
     public void onBindViewHolder(Holder holder, final int position) {
-        final Rate rates = ratesListSorted.get(position);
-
-       // position = 1, tiker =retes.getTxt();
-
-        tickerMap.put(position,rates.getR030());
-
-        holder.mTextViewTitle.setText(rates.getTxt());
-        holder.mTextViewСс.setText(rates.getCc());
-        holder.mTextViewRate.setText(Float.toString(rates.getRate()));
-        holder.mTextViewExchangedate.setText(rates.getExchangedate());
+        holder.onBind(holder,position);
     }
+
+
 
     @Override
     public int getItemCount() {
@@ -97,6 +90,19 @@ public class DataAdapter extends RecyclerView.Adapter<DataAdapter.Holder>{
             mTextViewСс = (TextView) v.findViewById(R.id.text_Cc);
             mTextViewRate = (TextView) v.findViewById(R.id.text_rate);
             mTextViewExchangedate = (TextView) v.findViewById(R.id.text_exchangedate);
+
+        }
+
+        public void onBind(Holder holder, int position) {
+
+            final Rate rates = ratesListSorted.get(position);
+            tickerMap.put(position,rates.getR030());
+
+            holder.mTextViewTitle.setText(rates.getTxt());
+            holder.mTextViewСс.setText(rates.getCc());
+            holder.mTextViewRate.setText(Float.toString(rates.getRate()));
+            holder.mTextViewExchangedate.setText(rates.getExchangedate());
+
 
         }
     }

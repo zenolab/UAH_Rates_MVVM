@@ -9,8 +9,9 @@ import android.os.Bundle
 import android.os.Handler
 import android.support.v7.preference.PreferenceManager
 import android.view.animation.BounceInterpolator
+import com.uah_rates.grd.uahrates.graph.LocalStorage
 
-import com.uah_rates.grd.uahrates.ui.MainBaseActivity
+import com.uah_rates.grd.uahrates.ui.MainActivity
 import kotlinx.android.synthetic.main.activity_splash.*
 
 class SplashActivity : AppCompatActivity() {
@@ -28,7 +29,7 @@ class SplashActivity : AppCompatActivity() {
 
         if (!isFinishing) {
 
-            val intent = Intent(applicationContext, MainBaseActivity::class.java)
+            val intent = Intent(applicationContext, MainActivity::class.java)
             startActivity(intent)
             finish()
         }
@@ -70,7 +71,7 @@ class SplashActivity : AppCompatActivity() {
         valueAnimator.duration = ANIMATION_DURATION
 
         // Set animator listener.
-        val intent = Intent(this,  MainBaseActivity::class.java)
+       // val intent = Intent(this,  MainActivity::class.java)
         valueAnimator.addListener(object : Animator.AnimatorListener {
             override fun onAnimationRepeat(p0: Animator?) {}
 

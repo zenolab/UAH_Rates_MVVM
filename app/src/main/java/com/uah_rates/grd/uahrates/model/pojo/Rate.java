@@ -6,6 +6,7 @@ import com.google.gson.annotations.SerializedName;
 public final class Rate
 {
 
+    //code  of rate
     @SerializedName("r030")
     public Integer r030;
 

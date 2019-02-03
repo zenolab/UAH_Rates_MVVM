@@ -34,7 +34,7 @@ public class ApiResponse {
 
 
     public ApiResponse() {
-
+       // this.error = new Throwable();
     }
 
     public ApiResponse(List<Rate> rates) {

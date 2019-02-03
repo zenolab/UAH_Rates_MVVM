@@ -17,7 +17,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 
 import com.uah_rates.grd.uahrates.R;
-import com.uah_rates.grd.uahrates.graph.Model;
+import com.uah_rates.grd.uahrates.graph.LocalStorage;
 import com.uah_rates.grd.uahrates.ui.pager.HostFragment;
 import com.uah_rates.grd.uahrates.ui.screens.AllRatesFragmentView;
 import com.uah_rates.grd.uahrates.ui.screens.InfoAppFragmentView;
@@ -26,7 +26,7 @@ import com.uah_rates.grd.uahrates.ui.screens.XDRFragmentView;
 import com.uah_rates.grd.uahrates.ui.screens.dialog.InfoDialogFragment;
 import com.uah_rates.grd.uahrates.settings.SettingsFragment;
 
-public final class MainBaseActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener{
+public  class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener{
 
     private static final String LOG_TAG = new RuntimeException().getStackTrace()[0].getClassName();
     private Fragment fragment = null;
@@ -49,7 +49,7 @@ public final class MainBaseActivity extends AppCompatActivity implements Navigat
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
 
-        Model model = new Model(this);
+        new LocalStorage(this);
 
     }//End onCreate()
 

@@ -9,7 +9,7 @@ import retrofit2.Call;
 import retrofit2.http.GET;
 import retrofit2.http.Query;
 
-public interface RetrofitCallRateService {
+public interface ApiService {
 
     @GET("NBUStatService/v1/statdirectory/exchange?json")
     Call<List <Rate> > fetchRates();

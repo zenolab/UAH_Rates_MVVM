@@ -26,7 +26,7 @@ import com.uah_rates.grd.uahrates.ui.screens.XDRFragmentView;
 import com.uah_rates.grd.uahrates.ui.screens.dialog.InfoDialogFragment;
 import com.uah_rates.grd.uahrates.settings.SettingsFragment;
 
-public  class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener{
+public  class MainActivity extends BaseActivity implements NavigationView.OnNavigationItemSelectedListener{
 
     private static final String LOG_TAG = new RuntimeException().getStackTrace()[0].getClassName();
     private Fragment fragment = null;
@@ -145,8 +145,7 @@ public  class MainActivity extends AppCompatActivity implements NavigationView.O
     protected void onResume(){
         super.onResume();
         Log.d(LOG_TAG, "onResume");
-
-            mainView();
+        mainView();
     }
 
     @Override

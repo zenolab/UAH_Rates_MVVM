@@ -7,6 +7,7 @@ import android.util.Log;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 import com.uah_rates.grd.uahrates.App;
+import com.uah_rates.grd.uahrates.Invariance;
 import com.uah_rates.grd.uahrates.api.ApiService;
 import com.uah_rates.grd.uahrates.model.pojo.Rate;
 import io.reactivex.Observable;
@@ -23,13 +24,11 @@ public class LocalStorage {
 
     private static final String LOG_TAG = new RuntimeException().getStackTrace()[0].getClassName();
 
-    final static String KEY_VALUE = "MyVariables";
-    public final static String SP_KEY = "CHART_DATA";
+//    final static String KEY_VALUE = "MyVariables";
+//    public final static String SP_STORAGE_KEY = "CHART_DATA";
 
     private Context context;
-
     private int[] dataRangeArray = new int[10];
-
 
     private LinkedList<Float> valueList = new LinkedList<>();
     private  List<Rate> justList = new ArrayList<>();
@@ -59,31 +58,27 @@ public class LocalStorage {
 
     //------------------------Constructor--------------------------------------
     public LocalStorage(Context context) {
-
         this.context = context;
-
-      //  selected = 840;//usd
-
         service = App.RetrofitClientInstance
                 .getRetrofitInstance()
                 .create(ApiService.class);
 
         observables = null;
         observables = new ArrayList<Observable<List<Rate>>>();
+        //----------------just show ---------------------
+//        for (Map.Entry entry : hashMap10.entrySet()) {
+//            System.out.println("Key: " + entry.getKey() + " Value: "
+//                    + entry.getValue());
+//            Log.e(LOG_TAG, "i =======::========:::for (Map.Entry entry : hashMap10.entrySet())  :::::> " + "Key: " + entry.getKey() + " Value: "
+//                    + entry.getValue());
+//        }
+        //-------------------------------------------------
 
-
-        for (Map.Entry entry : hashMap10.entrySet()) {
-            System.out.println("Key: " + entry.getKey() + " Value: "
-                    + entry.getValue());
-            Log.e(LOG_TAG, "i =======::========:::for (Map.Entry entry : hashMap10.entrySet())  :::::> " + "Key: " + entry.getKey() + " Value: "
-                    + entry.getValue());
-        }
-
-        getRatesС();
+        getHistory();
 
     }
     //---------------------------------------------------------------
-    public List<Rate> getRatesС() {
+    public List<Rate> getHistory() {
 
         int baseDate = getCurrentDate();
         int countdownStep = 10_000;//1 year
@@ -105,15 +100,17 @@ public class LocalStorage {
         //****************************************
 
         //******************test**********************
-        showHistory(getHashMap(SP_KEY));
+       // showHistory(getData(SP_STORAGE_KEY));
         //****************************************
 
-        int a = 1;
-        for (Observable<List<Rate>> temp : observables) {
-            System.out.println(temp);
-            Log.d(LOG_TAG, "iterator #### ----- temp : observables ========= " + temp + " ********* ==" + a);
-            a++;
-        }
+        //----------------just show ---------------------
+//        int a = 1;
+//        for (Observable<List<Rate>> temp : observables) {
+//            System.out.println(temp);
+//            Log.d(LOG_TAG, "observables ========= " + temp + " ********* ==" + a);
+//            a++;
+//        }
+        //--------------------------------------------
 
         return null;
     }
@@ -127,14 +124,14 @@ public class LocalStorage {
 
         String toDay;
         String toMonth;
-        if(mDay <10 ) {
+        if (mDay <10) {
             toDay = "0" + mDay;
-        }else{
+        } else {
             toDay = String.valueOf(mDay);
         }
-        if(month<10){
+        if (month<10) {
             toMonth = "0"+month;
-        }else {
+        } else {
             toMonth = String.valueOf(month);
         }
 
@@ -165,149 +162,37 @@ public class LocalStorage {
 
                     @Override
                     public void onNext(List<Rate> value) {
-                        Log.d(LOG_TAG, ":: Observable.concat >>>>>>> onNext " + value.size());
+                        Log.d(LOG_TAG, " Observable.concat >>>>>>> onNext " + value.size());
                         linkedHashMap.put(count, value);
-
                         count++;
-                        Log.d(LOG_TAG, ":: -----count-------(onNext) " + count);
-
                     }
 
                     @Override
                     public void onError(@NonNull Throwable e) {
-                        Log.d(LOG_TAG, "onError " + e.getMessage());
+                        Log.d(LOG_TAG, " onError " + e.getMessage());
                     }
 
                     @Override
                     public void onComplete() {
-
-                       // myResult(linkedHashMap);
-                        saveHashMap(SP_KEY, linkedHashMap);
+                        saveHashMap(Invariance.SP_ITEM_KEY, linkedHashMap);
                     }
                 });
-
-        Log.d(LOG_TAG, "linkedHashMap.size " + linkedHashMap.size());
-        Log.d(LOG_TAG, "linkedHashMap.size " + linkedHashMap.size());
-
     }
 
-    private void myResult(Map<Integer, List<Rate>> linkedHashMap) {
-
-        saveHashMap(SP_KEY, linkedHashMap);
-        // saveHashMap(SP_KEY, null);  //CLEAR STORAGE
-        temperList.clear();
-      //  showHistory(linkedHashMap);
-
-        Log.e(LOG_TAG, "{}{}{}{}{}{}{}{}{}{}{}{}{}{}{}{}{}{}{}{}{}{}{}{}{}{}{}{}{}{} ");
-        for (Float value : valueList) {
-            //                System.out.println(model.getName());
-            Log.e(LOG_TAG, ":: -----list- line for chart value------ " + value);
-        }
-        Log.e(LOG_TAG, "{}{}{}{}{}{}{}{}{}{}{}{}{}{}{}{}{}{}{}{}{}{}{}{}{}{}{}{}{}{} ");
-
-    }
-
-    private void showHistory(Map<Integer,List<Rate>> linkedHashMap) {
-
-        Log.d(LOG_TAG, "========================= <linkedHashMap > ==========================");
-
-        for (Map.Entry<Integer, List<Rate>> entry : linkedHashMap.entrySet()) {
-            Log.d(LOG_TAG, " *** linkedHashMap @-- Map.Entry - это ключ и его значение, объединенное в один класс.  --@********* "
-                    + entry.getKey() + " " + entry.getValue());
-
-
-            temperList = entry.getValue();
-            for (Rate tickerCode : temperList) {
-                //                System.out.println(tickerCode.getName());
-                Log.e(LOG_TAG, ":: -----list- result------ " + tickerCode.getTxt());
-                Log.d(LOG_TAG, ":: -----list- result------ " + tickerCode.getExchangedate());
-                Log.d(LOG_TAG, ":: -----list- result------ " + tickerCode.getRate());
-                Log.d(LOG_TAG, ":: -----list- result------ " + tickerCode.getCc());  // RSD
-                Log.d(LOG_TAG, ":: -----list- result------ " + tickerCode.getR030()); // 944
-
-                if (tickerCode.getR030() == selected) {
-                    // valueList.addFirst();
-                    valueList.addLast(tickerCode.getRate());
-
-                }
-            }
-            //-------------------------------------------
-            /* Display content using Iterator*/
-//        Set set = hashMap10.entrySet();
-//        Iterator iterator = set.iterator();
-//        while(iterator.hasNext()) {
-//            Map.Entry mentry = (Map.Entry)iterator.next();
-//            System.out.print("............key is: "+ mentry.getKey() + " & Value is: ");
-//            System.out.println(mentry.getValue());
-//            Log.e(LOG_TAG, "_________while(iterator.hasNext())_____  "  + mentry.getKey() + " & Value is: ");
-//
-//
-//        }
-            //-------------------------------------------
-
-        }
-    }
-
-    private void handleResultsThrowable(Throwable t) {
-
-        Log.e(LOG_TAG, " Throwable  " + t.getMessage());
-    }
-
-    //===============================================================
-    private  void handleResults(List<Rate> rates) {
-        Log.e(LOG_TAG, "onSuccess " + rates.size());
-    }
-    private void handleError(Throwable throwable) {
-        Log.d(LOG_TAG, "onError " + throwable.getMessage());
-    }
-
-
-    //===============================================================
-
-    //--------------------------------------------------------------------------------------------------
 
     /**
-     * Save and get HashMap in SharedPreference
+     * Save  HashMap in SharedPreference
      */
-
     public void saveHashMap(String key, Object obj) {
-        // getActivity().getApplicationContext().getSharedPreferences("MyVariables", Context.MODE_PRIVATE);
-        // SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences("MyVariables", Context.MODE_PRIVATE);
-        SharedPreferences prefs = context.getApplicationContext().getSharedPreferences(KEY_VALUE, MODE_PRIVATE);
+
+        SharedPreferences prefs = context.getApplicationContext().getSharedPreferences(Invariance.SP_STORAGE_KEY, MODE_PRIVATE);
         SharedPreferences.Editor editor = prefs.edit();
         Gson gson = new Gson();
         String json = gson.toJson((LinkedHashMap)obj);
         editor.putString(key, json);
-        editor.apply();     // This line is IMPORTANT !!!
+        editor.apply();
     }
 
-
-    public LinkedHashMap<Integer, List<Rate>> getHashMap(String key) {
-        // SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(this);
-        SharedPreferences prefs = context.getApplicationContext().getSharedPreferences(KEY_VALUE, MODE_PRIVATE);
-        Gson gson = new Gson();
-        String json = prefs.getString(key, "");
-        // Uses Reflection api for instantiate anyone(whatever)  object in runtime  from GSON
-        // TypeToken -Заставляет клиентов создавать подкласс этого класса, который позволяет извлекать информацию о типе даже во время выполнения.
-        // TypeToken - Создает литерал (фиксированное значение) нового типа. Производные, представляемые классом из типа
-        // Клиенты создают пустой подкласс. Это создает тип в иерархии типов анонимного класса,
-        // чтобы можно было его восстановить во время выполнения, несмотря на стирание Generic.
-        // Где ожидается имя типа.
-        // new TypeToken<ArrayList<T>>()
-        // public class TypeToken<T>
-        java.lang.reflect.Type type = new TypeToken<LinkedHashMap<Integer, List<Rate>>>() {
-        }.getType();
-        LinkedHashMap<Integer, List<Rate>> listLinkedHashMap = gson.fromJson(json, type);
-
-        if(listLinkedHashMap ==null){
-            Log.d(LOG_TAG, "========================= <linkedHashMap > =>>>>>>>> obj NULL <<<<<<======================== " +listLinkedHashMap);
-        }else {
-            Log.d(LOG_TAG, "========================= <linkedHashMap > ==1000000000======================== " + listLinkedHashMap);
-        }
-
-
-        return listLinkedHashMap;
-    }
 
 
 }

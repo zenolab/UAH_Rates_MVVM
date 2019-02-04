@@ -14,7 +14,7 @@ import java.util.concurrent.TimeUnit;
 
 public class App extends Application {
 
-    final static String sp_key = "CHART_DATA";
+
 
    //-------------------------------------------------------------------------------------------------------------------
    public static class CacheResponse {
@@ -32,7 +32,6 @@ public class App extends Application {
 
    //-------------------------------------------------------------------------------------------------------------------
   public static class RetrofitClientInstance {
-
 
     private static Retrofit retrofit;
     private static final String BASE_URL = "https://bank.gov.ua/";

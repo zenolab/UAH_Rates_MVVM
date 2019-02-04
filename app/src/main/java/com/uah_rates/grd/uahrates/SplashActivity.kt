@@ -48,7 +48,7 @@ class SplashActivity : AppCompatActivity() {
     private fun loadPref() {
 
         sharedPreferences = PreferenceManager.getDefaultSharedPreferences(this)
-        val prefValue = sharedPreferences!!.getString("RATE_PREF_KEY", "")
+        val prefValue = sharedPreferences!!.getString(Invariance.SETTINGS_KEY, "")
 
         if (prefValue == "Off") {
             SPLASH_DELAY = 0

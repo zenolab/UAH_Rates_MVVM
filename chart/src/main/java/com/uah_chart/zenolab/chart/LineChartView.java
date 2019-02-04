@@ -9,6 +9,7 @@ import android.util.AttributeSet;
 
 import android.util.Log;
 import android.view.View;
+import android.view.ViewGroup;
 
 import java.util.Arrays;
 import java.util.Collections;
@@ -92,8 +93,15 @@ public class LineChartView extends View {
     }
 
     // Arrays.sort(datesCalculate, Collections.reverseOrder());
+//-------------------------------------------------------------------------------------------------------------------
+//    Если вы хотите расположить дочерние элементы пользовательского представления самостоятельно,
+//    в отличие от расширения пользовательского представления LinearLayout или аналогичного,
+//    вам необходимо реализовать методы onLayout и onMeasure в ViewGroup.
 
-    /*
+
+    //вызывается пару раз onMeasure() для определения размеров;
+    //Called to determine the size requirements for this view and all of its children.
+    // Вызывается для определения требований к размеру для этого представления и всех его дочерних элементов.
     @Override
     protected void onMeasure(int widthMeasureSpec, int heightMeasureSpec) {
         super.onMeasure(widthMeasureSpec, heightMeasureSpec);
@@ -107,8 +115,26 @@ public class LineChartView extends View {
             size = width;
         }
         setMeasuredDimension(size, size);
+        Log.d(LOG_TAG, "-------  onMeasure ------ width " + width);
+        Log.d(LOG_TAG, "-------- onMeasure ----- height " + height);
     }
-    */
+
+    //вызывается onLayout() для расположения элемента внутри контейнера (ViewGroup);
+   // Called from layout when this view should assign a size and position to each of its children.
+    // Derived classes with children should override this method and call layout on each of their children.
+    //Вызывается из макета, когда это представление должно назначать размер и положение каждому из его дочерних элементов.
+    // Производные классы с детьми должны переопределять этот метод и вызывать макет для каждого из своих детей.
+    @Override
+    protected void onLayout(boolean changed, int left, int top, int right, int bottom) {
+        Log.d(LOG_TAG, "-------- onLayout ----- left " + left);
+        Log.d(LOG_TAG, "-------- onLayout ----- top " + top);
+        Log.d(LOG_TAG, "-------- onLayout ----- right " + right);
+        Log.d(LOG_TAG, "-------- onLayout ----- bottom " + bottom);
+
+    }
+//-------------------------------------------------------------------------------------------------------------------
+
+
 
     @Override
     protected void onDraw(Canvas canvas) {

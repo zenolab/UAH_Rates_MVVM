@@ -110,15 +110,14 @@ public abstract class BaseRateFragment extends Fragment {
             @Override
             public void onClick(View view, final int position) {
               //  Toast.makeText(getActivity(), "Click "+position , Toast.LENGTH_LONG).show();
-
                 Intent intent = new Intent(getActivity(),ChartActivity.class);
                 intent.putExtra("rcode", dataAdapter.tickerMap.get(position));
+               // intent.putExtra("tiker", dataAdapter.tickerMap.get(position));
                 startActivity(intent);
             }
             @Override
             public void onLongClick(View view, int position) {
               //  Toast.makeText(getActivity(), "Long press on position :"+position, Toast.LENGTH_LONG).show();
-
                 Intent intent = new Intent(getActivity(),ChartActivity.class);
                 intent.putExtra("rcode", dataAdapter.tickerMap.get(position));
                 startActivity(intent);

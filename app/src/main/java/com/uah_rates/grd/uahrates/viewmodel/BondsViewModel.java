@@ -38,34 +38,27 @@ public class BondsViewModel extends ViewModel {
         // clean up resources
     }
 
-    /**
-     * Repository
-     */
+    //---------------------------------------------Repositor------------------------------------------------------------
     private void loadRates() {
 
         ApiService service = App.RetrofitClientInstance
                 .getRetrofitInstance()
                 .create(ApiService.class);
 
-
         Call<List<Bond>> call = service.fetchBonds();
         call.enqueue(new Callback<List<Bond>>() {
 
             @Override
             public void onResponse(Call<List<Bond>> call, Response<List<Bond>> response) {
-
-                Log.e(LOG_TAG, "******* > RETROFIT - onResponse ");
+                Log.e(LOG_TAG, "onResponse "+response.body());
                 bondsList.setValue(response.body());
-                Log.d(LOG_TAG, "******* > RETROFIT - JSON  all " + response);
-                Log.w(LOG_TAG, "******* > RETROFIT - JSON code " + response.code());
-                Log.e(LOG_TAG, "******* > RETROFIT - JSON " + response.body());
             }
 
             @Override
             public void onFailure(Call<List<Bond>> call, Throwable t) {
                 Log.e(LOG_TAG, "******* > RETROFIT - onFailure "+t.getMessage());
-
             }
         });
     }
+    //------------------------------------------------------------------------------------------------------------------
 }

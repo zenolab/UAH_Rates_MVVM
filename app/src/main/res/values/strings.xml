@@ -74,6 +74,7 @@
     <string name="title_xdr">Информация о СПЗ (XDR)</string>
     <string name="name_menu_more_app2">More...</string>
     <string name="title_activity_base">BaseActivity</string>
+    <string name="name_menu_bond">Bond</string>
 
 
 </resources>

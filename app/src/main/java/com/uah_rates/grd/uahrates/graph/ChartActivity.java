@@ -4,7 +4,6 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
-import android.util.Log;
 import android.widget.Toast;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
@@ -22,7 +21,6 @@ public class ChartActivity extends BaseActivity {
 
     private Context applicationContext;
 
-
     private LinkedHashMap<Integer, List<Rate>> storageLinkedHashMap = new LinkedHashMap<Integer, List<Rate>>();
     private List<Rate> dummyList = new ArrayList<>();
 
@@ -30,18 +28,17 @@ public class ChartActivity extends BaseActivity {
     private int selected;
     private float chartRange[] = new float[10];
 
-    public static Context context;
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_chart);
 
-        context=this;
         applicationContext =getApplicationContext();
 
         Intent intent = getIntent();
-        selected = intent.getIntExtra("rcode",0);
+        this.selected = intent.getIntExtra("rcode",0);
+
+        setTitle("Chart");
 
         storageLinkedHashMap = getHistory(Invariance.SP_ITEM_KEY);
         getData(storageLinkedHashMap );
@@ -50,7 +47,7 @@ public class ChartActivity extends BaseActivity {
         lineChart.setChartData(chartRange);
     }
 
-    //=====================Load data===========================
+
     public LinkedHashMap<Integer, List<Rate>> getHistory(String key) {
         SharedPreferences prefs = applicationContext.getSharedPreferences(Invariance.SP_STORAGE_KEY, MODE_PRIVATE);
         Gson gson = new Gson();
@@ -87,7 +84,6 @@ public class ChartActivity extends BaseActivity {
         return listLinkedHashMap;
     }
 
-    //-------------------------------------------------------
     private void getData(Map<Integer,List<Rate>> linkedHashMap) {
 
         outputList.clear();
@@ -102,48 +98,25 @@ public class ChartActivity extends BaseActivity {
         }
         getChart(outputList);
     }
-    //-------------------------------------------------------
 
+    public void getChart(LinkedList<Float> valuesChart) {
 
-    public void getChart(LinkedList<Float> valuesChart){
-
-        //temporal resolve for interator NoSuchElementException (several item)
-        try {
             Iterator lit = valuesChart.descendingIterator();
 
-            System.out.println("Backward Iterations");
-            Log.d(LOG_TAG, "========================= <linkedList > ===========Output===============");
             int step = 0;
-            // Caused by: java.util.NoSuchElementException
-            // java.lang.ArrayIndexOutOfBoundsException: length=10; index=10
-        while(lit.hasNext()){
+            while (lit.hasNext()) {
 
-            if (step<chartRange.length) {
-                chartRange[step] = (float) lit.next(); //Caused by: java.lang.ArrayIndexOutOfBoundsException: length=10; index=10
-                step = step + 1;
-            }else {
-                //return;
-                break;
+                if (step<chartRange.length) {
+                    chartRange[step] = (float) lit.next();
+                    step = step + 1;
+                }else {
+                    break;
+                }
             }
-        }
 
-//            for (int i = 0; i < chartRange.length; i++) {
-//                System.out.println(chartRange[i]);
-//                Log.d(LOG_TAG, "========================= <Array > =====last ticket " + selected + " ======contain=============== " + chartRange[i]);
-//
-//                chartRange[step] = (float) lit.next(); // java.util.NoSuchElementException
-//                step = step + 1;
-//            }
-        }catch (java.util.NoSuchElementException exception){
-            Log.d(LOG_TAG, "===== java.util.NoSuchElementException -- LinkedList<Float>  Iterator is null======");
-
-            Toast.makeText(this, " К сожалению нет точных данных !", Toast.LENGTH_LONG).show();
-        }
-
-        //RUB=643
-        if(selected==643||selected==960){
-            Toast.makeText(this, " К сожалению нет корректных данных по данному тикеру!", Toast.LENGTH_LONG).show();
-        }
+            if(selected==643||selected==960){
+                Toast.makeText(this, " К сожалению нет корректных данных по данному тикеру!", Toast.LENGTH_LONG).show();
+            }
     }
 
 }

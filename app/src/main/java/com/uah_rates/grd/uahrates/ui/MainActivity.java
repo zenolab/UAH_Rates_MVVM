@@ -19,10 +19,7 @@ import android.view.MenuItem;
 import com.uah_rates.grd.uahrates.R;
 import com.uah_rates.grd.uahrates.graph.LocalStorage;
 import com.uah_rates.grd.uahrates.ui.pager.HostFragment;
-import com.uah_rates.grd.uahrates.ui.screens.AllRatesFragmentView;
-import com.uah_rates.grd.uahrates.ui.screens.InfoAppFragmentView;
-import com.uah_rates.grd.uahrates.ui.screens.PlayStoreFragmentView;
-import com.uah_rates.grd.uahrates.ui.screens.XDRFragmentView;
+import com.uah_rates.grd.uahrates.ui.screens.*;
 import com.uah_rates.grd.uahrates.ui.screens.dialog.InfoDialogFragment;
 import com.uah_rates.grd.uahrates.settings.SettingsFragment;
 
@@ -77,8 +74,10 @@ public  class MainActivity extends BaseActivity implements NavigationView.OnNavi
             setTitle("All quotes");
         } else if (id == R.id.nav_slideshow) {
              fragment = new XDRFragmentView();
-            // fragment = new BondFragment();
             setTitle("XDR");
+        } else if (id == R.id.nav_bond) {
+            setTitle("Bond");
+            fragment = new BondFragment();
         } else if (id == R.id.nav_manage) {
             fragment = new SettingsFragment();
             setTitle("Menu");

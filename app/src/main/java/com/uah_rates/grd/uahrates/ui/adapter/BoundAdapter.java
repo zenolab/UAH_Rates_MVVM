@@ -33,13 +33,7 @@ public class BoundAdapter extends RecyclerView.Adapter<BoundAdapter.CustomViewHo
 
     @Override
     public void onBindViewHolder(CustomViewHolder holder, int position) {
-
-        holder.mTextViewTitle.setText(dataList.get(position).getStockcode());
-        holder.mTextViewСс.setText(dataList.get(position).getValcode());
-        holder.mTextViewRate.setText((Float.toString(dataList.get(position).getAvglevel())) );
-        holder.mTextViewExchangedate.setText(dataList.get(position).getAuctiondate());
-        holder.coverImage.setImageResource(R.drawable.nbu_image01);
-
+        holder.bindHolder(position);
     }
 
     @Override
@@ -76,6 +70,15 @@ public class BoundAdapter extends RecyclerView.Adapter<BoundAdapter.CustomViewHo
             mTextViewExchangedate = (TextView)  mView.findViewById(R.id.text_exchangedate);
 
             coverImage = mView.findViewById(R.id.coverImage);
+        }
+
+        public void bindHolder(int position) {
+
+            this.mTextViewTitle.setText(dataList.get(position).getStockcode());
+            this.mTextViewСс.setText(dataList.get(position).getValcode());
+            this.mTextViewRate.setText((Float.toString(dataList.get(position).getAvglevel())) );
+            this.mTextViewExchangedate.setText(dataList.get(position).getAuctiondate());
+            this.coverImage.setImageResource(R.drawable.nbu_image01);
         }
     }
 

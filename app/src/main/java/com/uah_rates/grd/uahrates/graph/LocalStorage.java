@@ -5,7 +5,6 @@ import android.content.SharedPreferences;
 import android.support.annotation.NonNull;
 import android.util.Log;
 import com.google.gson.Gson;
-import com.google.gson.reflect.TypeToken;
 import com.uah_rates.grd.uahrates.App;
 import com.uah_rates.grd.uahrates.Invariance;
 import com.uah_rates.grd.uahrates.api.ApiService;
@@ -24,28 +23,9 @@ public class LocalStorage {
 
     private static final String LOG_TAG = new RuntimeException().getStackTrace()[0].getClassName();
 
-//    final static String KEY_VALUE = "MyVariables";
-//    public final static String SP_STORAGE_KEY = "CHART_DATA";
-
     private Context context;
     private int[] dataRangeArray = new int[10];
 
-    private LinkedList<Float> valueList = new LinkedList<>();
-    private  List<Rate> justList = new ArrayList<>();
-    private List<Rate> temperList = new ArrayList<>();
-
-    private int selected;
-
-
-    //Constructs an empty LinkedHashMap instance with the specified initial capacity, load factor and ordering mode.
-    //Это создает пустой экземпляр LinkedHashMap, помещенный в вставку, с указанной начальной initial capacity и коэффициентом загрузки(load factor) по умолчанию (0,75).
-    //load factor - коэффициент нагрузки определяется как средняя нагрузка, деленная на пиковую нагрузку за указанный период времени.
-    /**
-     * Parameters:
-     * initialCapacity - the initial capacity
-     * loadFactor - the load factor
-     * accessOrder - the ordering mode - true for access-order, false for insertion-order (accessOrder - режим заказа - true для порядка доступа, false для ввода-заказа)
-     */
     private Map<Integer, List<Rate>> linkedHashMap = new LinkedHashMap<Integer, List<Rate>>(10, 0.75f, true);
     public static Map<Integer, List<Rate>> scopeAppLinkedHashMap = new LinkedHashMap<Integer, List<Rate>>(10, 0.75f, true);
 
@@ -54,9 +34,6 @@ public class LocalStorage {
 
     private ApiService service;
 
-
-
-    //------------------------Constructor--------------------------------------
     public LocalStorage(Context context) {
         this.context = context;
         service = App.RetrofitClientInstance
@@ -65,54 +42,23 @@ public class LocalStorage {
 
         observables = null;
         observables = new ArrayList<Observable<List<Rate>>>();
-        //----------------just show ---------------------
-//        for (Map.Entry entry : hashMap10.entrySet()) {
-//            System.out.println("Key: " + entry.getKey() + " Value: "
-//                    + entry.getValue());
-//            Log.e(LOG_TAG, "i =======::========:::for (Map.Entry entry : hashMap10.entrySet())  :::::> " + "Key: " + entry.getKey() + " Value: "
-//                    + entry.getValue());
-//        }
-        //-------------------------------------------------
-
-        getHistory();
+        loadHistory();
 
     }
-    //---------------------------------------------------------------
-    public List<Rate> getHistory() {
+
+    public void loadHistory() {
 
         int baseDate = getCurrentDate();
         int countdownStep = 10_000;//1 year
 
-        int subtraction = 0; //вычитание
-
         for (int i = 0; i <= 9; i++) {
-            Log.e(LOG_TAG, ":::::::::::::: baseDate ::::::::::::: " + baseDate);
-            Log.d(LOG_TAG, "i =============== " + i);
             observables.add(i, service.fetchHistoryObservable(baseDate));
             baseDate -= countdownStep;
             dataRangeArray[i] = baseDate;
-
         }
+        getRepository();
+       // showHistory(getData(SP_STORAGE_KEY)); // test
 
-        //---------------------------------------
-        //****************************************
-         getRepository();
-        //****************************************
-
-        //******************test**********************
-       // showHistory(getData(SP_STORAGE_KEY));
-        //****************************************
-
-        //----------------just show ---------------------
-//        int a = 1;
-//        for (Observable<List<Rate>> temp : observables) {
-//            System.out.println(temp);
-//            Log.d(LOG_TAG, "observables ========= " + temp + " ********* ==" + a);
-//            a++;
-//        }
-        //--------------------------------------------
-
-        return null;
     }
 
     private Integer getCurrentDate() {
@@ -162,7 +108,6 @@ public class LocalStorage {
 
                     @Override
                     public void onNext(List<Rate> value) {
-                        Log.d(LOG_TAG, " Observable.concat >>>>>>> onNext " + value.size());
                         linkedHashMap.put(count, value);
                         count++;
                     }
@@ -178,7 +123,6 @@ public class LocalStorage {
                     }
                 });
     }
-
 
     /**
      * Save  HashMap in SharedPreference

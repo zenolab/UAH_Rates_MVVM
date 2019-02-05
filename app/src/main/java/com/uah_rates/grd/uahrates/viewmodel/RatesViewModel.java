@@ -24,9 +24,7 @@ public class RatesViewModel extends ViewModel {
     public RatesViewModel() {
         this.apiResponseMediatorLiveData = new MediatorLiveData<>();
         this.ratesRepository = new RateRepositoryImpl();
-
-        Log.wtf("TTT", "we are here");
-
+        Log.wtf("RatesViewModel", "we are here ");
     }
 
     @NonNull

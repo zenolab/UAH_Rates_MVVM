@@ -17,6 +17,10 @@
             android:icon="@drawable/ic_view_day_black_24dp"
             android:title="@string/name_menu_xdr" />
         <item
+                android:id="@+id/nav_bond"
+                android:icon="@drawable/ic_view_day_black_24dp"
+                android:title="@string/name_menu_bond" />
+        <item
             android:id="@+id/nav_manage"
             android:icon="@drawable/ic_menu_manage"
             android:title="@string/name_menu_tools" />

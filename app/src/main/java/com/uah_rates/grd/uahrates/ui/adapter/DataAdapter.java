@@ -22,9 +22,8 @@ public class DataAdapter extends RecyclerView.Adapter<DataAdapter.Holder>{
     private final LayoutInflater inflator;
     private List<Rate> tempList;
     private List<Rate> ratesListSorted;
-    private List<Rate> ratesListSeached;
     public Map<Integer,Integer> tickerMap;
-    private RecyclerViewClickListener mListener;
+   // private RecyclerViewClickListener mListener;
 
     private  int template ;
 
@@ -35,7 +34,6 @@ public class DataAdapter extends RecyclerView.Adapter<DataAdapter.Holder>{
 
         this.tempList = new ArrayList<>();
         this.ratesListSorted = new ArrayList<>();
-        this.ratesListSeached = new ArrayList<>();
 
         tickerMap = null;
         tickerMap = new HashMap<>();
@@ -56,14 +54,11 @@ public class DataAdapter extends RecyclerView.Adapter<DataAdapter.Holder>{
         holder.onBind(holder,position);
     }
 
-
-
     @Override
     public int getItemCount() {
 
         return ratesListSorted.size();
     }
-
 
     public void addRates(List<Rate> rates) {
         tempList.clear();

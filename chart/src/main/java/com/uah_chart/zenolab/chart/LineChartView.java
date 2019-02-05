@@ -12,6 +12,7 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import java.util.Arrays;
+import java.util.Calendar;
 import java.util.Collections;
 
 public class LineChartView extends View {
@@ -20,17 +21,11 @@ public class LineChartView extends View {
 
     int years = 10;
 
-
     private static final float MIN_LINES = 0.0f;
     private static final float MAX_LINES = 10;
     private static final int[] DISTANCES = {1, 2, 5}; //distance for horizontal lines
 
-    //String datesCalculate [] = new String[] { "2008/10/25", "2009/10/25", "2010/10/25", "2011/10/25",  "2012/10/25","2013/10/25","2014/10/25","2015/10/25","2016/10/25","2017/10/25","2018/10/25" };
-    // String datesCalculate [] = new String[] { "2009", "2010", "2011",  "2012","2013","2014","2015","2016","2017","2018" };
-    // int datesCalculate [] = new int[] { 2009, 2010, 2011,  2012,2013,2014,2015,2016,2017,2018 };
     int datesCalculate[] = new int[10];
-    // int datesReverse [] = new int[10];
-
 
     private float[] datapoints = new float[]{};
     private Paint paint = new Paint();
@@ -47,25 +42,69 @@ public class LineChartView extends View {
     public LineChartView(Context context, AttributeSet attrs) {
         super(context, attrs);
 
-        int year = 2018;
-        int subtraction = 0; //вычитание
+        int year = Calendar.getInstance().get(Calendar.YEAR);;
         int temp = 0;
 
         for (int i = 0; i <= 9; i++) {
-
             temp = year - i;
             datesCalculate[i] = temp;
-            Log.d(LOG_TAG, "i ======YEAR FOR ========= = " + year);
-
+            Log.d(LOG_TAG, " Year " + year);
         }
-
         reverse(datesCalculate);
-
-
     }
 
+    @Override
+    protected void onDraw(Canvas canvas) {
+        drawLineChart(canvas);
+        float maxValue = getMax(datapoints);
+        drawBackground(canvas, maxValue);
+    }
 
-    public static void reverse(int[] array) {
+//----------------------------------------------------------------------------------------------------------------------
+    /** Если вы хотите расположить дочерние элементы пользовательского представления самостоятельно,
+     в отличие от расширения пользовательского представления LinearLayout или аналогичного,
+     вам необходимо реализовать методы onLayout и onMeasure в ViewGroup.
+
+     вызывается пару раз onMeasure() для определения размеров;
+     Called to determine the size requirements for this view and all of its children.
+     Вызывается для определения требований к размеру для этого представления и всех его дочерних элементов.
+    */
+    @Override
+    protected void onMeasure(int widthMeasureSpec, int heightMeasureSpec) {
+        super.onMeasure(widthMeasureSpec, heightMeasureSpec);
+
+        int width = getMeasuredWidth();
+        int height = getMeasuredHeight();
+
+//        int size = 0;
+//        if (width == height) {
+//            size = height;
+//        } else {
+//            size = width;
+//        }
+//        setMeasuredDimension(size, size);
+
+        setMeasuredDimension(width, height);
+        Log.d(LOG_TAG, "-------  onMeasure ------ width " + width);
+        Log.d(LOG_TAG, "-------- onMeasure ----- height " + height);
+    }
+
+    /** Вызывается onLayout() для расположения элемента внутри контейнера (ViewGroup);
+     Called from layout when this view should assign a size and position to each of its children.
+     Derived classes with children should override this method and call layout on each of their children.
+     Вызывается из макета, когда это представление должно назначать размер и положение каждому из его дочерних элементов.
+     Производные классы с детьми должны переопределять этот метод и вызывать макет для каждого из своих детей.
+     */
+    @Override
+    protected void onLayout(boolean changed, int left, int top, int right, int bottom) {
+        Log.d(LOG_TAG, "-------- onLayout ----- left " + left);
+        Log.d(LOG_TAG, "-------- onLayout ----- top " + top);
+        Log.d(LOG_TAG, "-------- onLayout ----- right " + right);
+        Log.d(LOG_TAG, "-------- onLayout ----- bottom " + bottom);
+    }
+//----------------------------------------------------------------------------------------------------------------------
+
+    private static void reverse(int[] array) {
         if (array == null) {
             return;
         }
@@ -79,69 +118,6 @@ public class LineChartView extends View {
             j--;
             i++;
         }
-
-    }
-
-
-    private void invertUsingFor(int[] array) {
-        for (int i = 0; i < array.length / 2; i++) {
-            int temp = array[i];
-            array[i] = array[array.length - 1 - i];
-            array[array.length - 1 - i] = temp;
-        }
-
-    }
-
-    // Arrays.sort(datesCalculate, Collections.reverseOrder());
-//-------------------------------------------------------------------------------------------------------------------
-//    Если вы хотите расположить дочерние элементы пользовательского представления самостоятельно,
-//    в отличие от расширения пользовательского представления LinearLayout или аналогичного,
-//    вам необходимо реализовать методы onLayout и onMeasure в ViewGroup.
-
-
-    //вызывается пару раз onMeasure() для определения размеров;
-    //Called to determine the size requirements for this view and all of its children.
-    // Вызывается для определения требований к размеру для этого представления и всех его дочерних элементов.
-    @Override
-    protected void onMeasure(int widthMeasureSpec, int heightMeasureSpec) {
-        super.onMeasure(widthMeasureSpec, heightMeasureSpec);
-        int size = 0;
-        int width = getMeasuredWidth();
-        int height = getMeasuredHeight();
-
-        if (width == height) {
-            size = height;
-        } else {
-            size = width;
-        }
-        setMeasuredDimension(size, size);
-        Log.d(LOG_TAG, "-------  onMeasure ------ width " + width);
-        Log.d(LOG_TAG, "-------- onMeasure ----- height " + height);
-    }
-
-    //вызывается onLayout() для расположения элемента внутри контейнера (ViewGroup);
-   // Called from layout when this view should assign a size and position to each of its children.
-    // Derived classes with children should override this method and call layout on each of their children.
-    //Вызывается из макета, когда это представление должно назначать размер и положение каждому из его дочерних элементов.
-    // Производные классы с детьми должны переопределять этот метод и вызывать макет для каждого из своих детей.
-    @Override
-    protected void onLayout(boolean changed, int left, int top, int right, int bottom) {
-        Log.d(LOG_TAG, "-------- onLayout ----- left " + left);
-        Log.d(LOG_TAG, "-------- onLayout ----- top " + top);
-        Log.d(LOG_TAG, "-------- onLayout ----- right " + right);
-        Log.d(LOG_TAG, "-------- onLayout ----- bottom " + bottom);
-
-    }
-//-------------------------------------------------------------------------------------------------------------------
-
-
-
-    @Override
-    protected void onDraw(Canvas canvas) {
-
-        drawLineChart(canvas);
-        float maxValue = getMax(datapoints);
-        drawBackground(canvas, maxValue);
     }
 
     private void drawBackground(Canvas canvas, float maxValue) {
@@ -155,29 +131,23 @@ public class LineChartView extends View {
         for (int y = 0; y < maxValue; y += range) {
 
             final int yPos = (int) getYPos(y);
-
             // turn off anti alias for lines, they get crisper then
             paint.setAntiAlias(false);
             canvas.drawLine(0, yPos, getWidth(), yPos, paint);
-
             // turn on anti alias again for the text
             paint.setAntiAlias(true);
             canvas.drawText(String.valueOf(y), getPaddingLeft() - 35, yPos - 12, paint);
-
         }
 
         for (int x = 0; x < datapoints.length; x++) {
 
             final int xPos = (int) getXPos(x);
-
             float startX, stopX, startY, stopY;
 
             float width = getWidth();
 
             int height = canvas.getHeight();
-
             int gridSize = years;
-
             //Align
             // int gridSpacing = (int) (Math.min(width, height) / gridSize);
             int gridSpacing = (int) (Math.ceil(height) / gridSize);
@@ -193,15 +163,12 @@ public class LineChartView extends View {
 
             paint.setAntiAlias(false);
             canvas.drawLine(startX, startY, stopX, stopY, paint);
-            //  canvas.drawLine(startX, getHeight(), stopX, stopY, paint);
-
             // turn on anti alias again for the text
             paint.setTextSize(16);
             paint.setAntiAlias(true);
+            // canvas.drawLine(startX, getHeight(), stopX, stopY, paint);
             canvas.drawText(String.valueOf(datesCalculate[x]), stopX + 6, stopY - 12, paint);
-
         }
-
     }
 
     //Вычислить количество горизонтальных линий
@@ -214,23 +181,22 @@ public class LineChartView extends View {
         do {
             //For first index element
             distance = DISTANCES[distanceIndex] * distanceMultiplier;
-            //Not working with api 23. FloatMath is deprecated. use Math instead. #366
-            // numberOfLines = (int) FloatMath.ceil(maxValue / distance); - дает целое число с нулевой дробной частью, ближайшее к числу аргумента справа, другими словами — округляет дробь
-            numberOfLines = (float) Math.ceil(maxValue / distance); // получить колистве линий исходня из максимального значения
-
+             /** Not working with api 23. FloatMath is deprecated. use Math instead.
+                numberOfLines = (int) FloatMath.ceil(maxValue / distance); - дает целое число с нулевой дробной частью,
+                ближайшее к числу аргумента справа, другими словами — округляет дробь
+                numberOfLines = (float) Math.ceil(maxValue / distance); // получить колистве линий исходня из максимального значения
+             */
             distanceIndex++;
             if (distanceIndex == DISTANCES.length) {
                 distanceIndex = 0;
                 distanceMultiplier *= 10; //
             }
-
-            //число линий не больше и не меньше указанного диапазона above   private static final int[] DISTANCES = { 1, 2, 5 };
+         //число линий не больше и не меньше указанного диапазона above   private static final int[] DISTANCES = { 1, 2, 5 };
         } while (numberOfLines < MIN_LINES || numberOfLines > MAX_LINES);
-
         return distance;
     }
 
-    //------------------------draw------------------------------------------------------------------
+    //------------------------draw--------------------------------------------------------------------------------------
 
     /**
      * конструируем объект path, используя созданный ранее метод getYPos().
@@ -259,29 +225,24 @@ public class LineChartView extends View {
         paint.setShadowLayer(0, 0, 0, 0);
     }
 
-    //------------------ calculate max value -------------------------------------------------------
-
+    //------------------ calculate max value ---------------------------------------------------------------------------
     /**
      * Функция для вычисления максимального значения Y (линии графика) перебирает массив и находит максимум.
      */
     private float getYPos(float value) {
         float height = getHeight() - getPaddingTop() - getPaddingBottom();
         float maxValue = getMax(datapoints);
-
         // scale it to the view size
         // масштабирования под высоту view
         value = (value / maxValue) * height;
-
-        // invert it so that higher values have lower y
+        // invert it so that higher values have lower
         // инверсия
         value = height - value;
-
         // offset it to adjust for padding
         // смещение чтобы учесть padding
         value += getPaddingTop();
         return value;
     }
-
 
     /**
      * Для X координаты ( линии графика)- функция масштабирования
@@ -289,13 +250,10 @@ public class LineChartView extends View {
     private float getXPos(float value) {
         float width = getWidth() - getPaddingLeft() - getPaddingRight();
         float maxValue = datapoints.length - 1;
-
         // масштабирования под размер view
         value = (value / maxValue) * width;
-
         // смещение чтобы учесть padding
         value += getPaddingLeft();
-
         return value;
     }
 

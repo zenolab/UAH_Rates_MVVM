@@ -5,7 +5,7 @@ import com.google.gson.annotations.SerializedName;
 //POJO should not have to extend class or implement interface
 public final class Rate
 {
-    /*
+
 
     //code  of rate
     @SerializedName("r030")
@@ -73,6 +73,6 @@ public final class Rate
     public void setExchangedate(String exchangedate) {
         this.exchangedate = exchangedate;
     }
-*/
+
 
 }

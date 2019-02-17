@@ -189,55 +189,6 @@ public final class Bond {
     }
 
 
-    /*
-[
-   {
-      "auctiondate":"03.07.2014",
-      "auctionnum":113,
-      "valcode":"UAH",
-      "stockcode":"UA4000180210",
-      "paydate":"04.07.2014",
-      "repaydate":"01.10.2014",
-      "stockrestrict":40000,
-      "stockrestrictn":0,
-      "incomelevel":12.0,
-      "avglevel":12.0,
-      "amount":40000,
-      "amountn":0,
-      "attraction":3.88628E7
-   },
-   {
-      "auctiondate":"12.02.2013",
-      "auctionnum":34,
-      "valcode":"USD",
-      "stockcode":"UA4000153282",
-      "paydate":"13.02.2013",
-      "repaydate":"03.02.2016",
-      "stockrestrict":0,
-      "stockrestrictn":0,
-      "incomelevel":0.0,
-      "avglevel":0.0,
-      "amount":0,
-      "amountn":0,
-      "attraction":0.0
-   },
-   {
-      "auctiondate":"23.04.2013",
-      "auctionnum":85,
-      "valcode":"UAH",
-      "stockcode":"UA4000165773",
-      "paydate":"24.04.2013",
-      "repaydate":"08.04.2020",
-      "stockrestrict":1310000,
-      "stockrestrictn":0,
-      "incomelevel":14.3000001907349,
-      "avglevel":14.3000001907349,
-      "amount":1310000,
-      "amountn":0,
-      "attraction":1.3134846E9
-   }
-]
- */
 
 
 

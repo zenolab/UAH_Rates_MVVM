@@ -4,6 +4,7 @@ import com.google.gson.annotations.SerializedName;
 
 public class EntityRate {
 
+    /*
     //code  of rate
     @SerializedName("r030")
     public Integer r030;
@@ -62,5 +63,6 @@ public class EntityRate {
     public void setExchangedate(String exchangedate) {
         this.exchangedate = exchangedate;
     }
+    */
 
 }

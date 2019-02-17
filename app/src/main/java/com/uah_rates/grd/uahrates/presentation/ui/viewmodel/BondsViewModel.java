@@ -12,6 +12,7 @@ import java.util.List;
 import com.uah_rates.grd.uahrates.App;
 import com.uah_rates.grd.uahrates.domain.interactor.model.pojo.Bond;
 import com.uah_rates.grd.uahrates.data.ApiService;
+import com.uah_rates.grd.uahrates.domain.interactor.usecase.BondUseCase;
 import com.uah_rates.grd.uahrates.domain.interactor.usecase.BondUseCaseImpl;
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -42,8 +43,26 @@ public class BondsViewModel extends ViewModel {
     //---------------------------------------------Repository------------------------------------------------------------
     private void loadBond() {
 
+        /*
+      try {
+           new BondUseCase() {
+
+               @Override
+               public void getDomainListener(BondUseCaseListener bondUseCaseListener, List<Bond> list) {
+                   bondsList.setValue(list);
+
+               }
+           };
+        }catch (Exception e){
+           Log.d(LOG_TAG,"-- Exception - "+e.getMessage());
+      }
+      */
+
+
         BondUseCaseImpl bondUseCase = new BondUseCaseImpl();
-       // bondUseCase.getRepositoryListener();
+        bondUseCase.getDomainListener((BondUseCaseListener) this);
+
+
 
 
 //        ApiService service = App.RetrofitClientInstance

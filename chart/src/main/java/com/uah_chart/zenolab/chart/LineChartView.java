@@ -42,7 +42,8 @@ public class LineChartView extends View {
     public LineChartView(Context context, AttributeSet attrs) {
         super(context, attrs);
 
-        int year = Calendar.getInstance().get(Calendar.YEAR);;
+        int year = Calendar.getInstance().get(Calendar.YEAR);
+        ;
         int temp = 0;
 
         for (int i = 0; i <= 9; i++) {
@@ -61,14 +62,16 @@ public class LineChartView extends View {
     }
 
 //----------------------------------------------------------------------------------------------------------------------
-    /** Если вы хотите расположить дочерние элементы пользовательского представления самостоятельно,
-     в отличие от расширения пользовательского представления LinearLayout или аналогичного,
-     вам необходимо реализовать методы onLayout и onMeasure в ViewGroup.
 
-     вызывается пару раз onMeasure() для определения размеров;
-     Called to determine the size requirements for this view and all of its children.
-     Вызывается для определения требований к размеру для этого представления и всех его дочерних элементов.
-    */
+    /**
+     * Если вы хотите расположить дочерние элементы пользовательского представления самостоятельно,
+     * в отличие от расширения пользовательского представления LinearLayout или аналогичного,
+     * вам необходимо реализовать методы onLayout и onMeasure в ViewGroup.
+     * <p>
+     * вызывается пару раз onMeasure() для определения размеров;
+     * Called to determine the size requirements for this view and all of its children.
+     * Вызывается для определения требований к размеру для этого представления и всех его дочерних элементов.
+     */
     @Override
     protected void onMeasure(int widthMeasureSpec, int heightMeasureSpec) {
         super.onMeasure(widthMeasureSpec, heightMeasureSpec);
@@ -89,11 +92,12 @@ public class LineChartView extends View {
         Log.d(LOG_TAG, "-------- onMeasure ----- height " + height);
     }
 
-    /** Вызывается onLayout() для расположения элемента внутри контейнера (ViewGroup);
-     Called from layout when this view should assign a size and position to each of its children.
-     Derived classes with children should override this method and call layout on each of their children.
-     Вызывается из макета, когда это представление должно назначать размер и положение каждому из его дочерних элементов.
-     Производные классы с детьми должны переопределять этот метод и вызывать макет для каждого из своих детей.
+    /**
+     * Вызывается onLayout() для расположения элемента внутри контейнера (ViewGroup);
+     * Called from layout when this view should assign a size and position to each of its children.
+     * Derived classes with children should override this method and call layout on each of their children.
+     * Вызывается из макета, когда это представление должно назначать размер и положение каждому из его дочерних элементов.
+     * Производные классы с детьми должны переопределять этот метод и вызывать макет для каждого из своих детей.
      */
     @Override
     protected void onLayout(boolean changed, int left, int top, int right, int bottom) {
@@ -181,17 +185,17 @@ public class LineChartView extends View {
         do {
             //For first index element
             distance = DISTANCES[distanceIndex] * distanceMultiplier;
-             /** Not working with api 23. FloatMath is deprecated. use Math instead.
-                numberOfLines = (int) FloatMath.ceil(maxValue / distance); - дает целое число с нулевой дробной частью,
-                ближайшее к числу аргумента справа, другими словами — округляет дробь
-                numberOfLines = (float) Math.ceil(maxValue / distance); // получить колистве линий исходня из максимального значения
+            /** Not working with api 23. FloatMath is deprecated. use Math instead.
+             numberOfLines = (int) FloatMath.ceil(maxValue / distance); - дает целое число с нулевой дробной частью,
+             ближайшее к числу аргумента справа, другими словами — округляет дробь
              */
+            numberOfLines = (float) Math.ceil(maxValue / distance); // получить колистве линий исходня из максимального значения
             distanceIndex++;
             if (distanceIndex == DISTANCES.length) {
                 distanceIndex = 0;
                 distanceMultiplier *= 10; //
             }
-         //число линий не больше и не меньше указанного диапазона above   private static final int[] DISTANCES = { 1, 2, 5 };
+            //число линий не больше и не меньше указанного диапазона above   private static final int[] DISTANCES = { 1, 2, 5 };
         } while (numberOfLines < MIN_LINES || numberOfLines > MAX_LINES);
         return distance;
     }
@@ -226,6 +230,7 @@ public class LineChartView extends View {
     }
 
     //------------------ calculate max value ---------------------------------------------------------------------------
+
     /**
      * Функция для вычисления максимального значения Y (линии графика) перебирает массив и находит максимум.
      */

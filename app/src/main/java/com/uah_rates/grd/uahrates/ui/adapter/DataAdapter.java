@@ -1,12 +1,11 @@
 package com.uah_rates.grd.uahrates.ui.adapter;
 
-import android.support.v7.widget.RecyclerView;
+import androidx.recyclerview.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 import com.uah_rates.grd.uahrates.R;
-import com.uah_rates.grd.uahrates.ui.adapter.listener.RecyclerViewClickListener;
 import com.uah_rates.grd.uahrates.model.pojo.Rate;
 
 import java.util.ArrayList;

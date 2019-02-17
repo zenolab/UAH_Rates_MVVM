@@ -2,7 +2,7 @@ package com.uah_rates.grd.uahrates.graph;
 
 import android.content.Context;
 import android.content.SharedPreferences;
-import android.support.annotation.NonNull;
+import androidx.annotation.NonNull;
 import android.util.Log;
 import com.google.gson.Gson;
 import com.uah_rates.grd.uahrates.App;

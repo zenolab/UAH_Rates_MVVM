@@ -1,7 +1,7 @@
 package com.uah_rates.grd.uahrates.model;
 
-import android.arch.lifecycle.LiveData;
-import android.arch.lifecycle.MutableLiveData;
+import androidx.lifecycle.LiveData;
+import androidx.lifecycle.MutableLiveData;
 import android.util.Log;
 
 

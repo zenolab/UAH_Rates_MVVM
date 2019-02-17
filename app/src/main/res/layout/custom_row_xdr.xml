@@ -1,15 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.v7.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:card_view="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/card_view"
-    android:layout_width="match_parent"
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+                                   xmlns:card_view="http://schemas.android.com/apk/res-auto"
+                                   xmlns:tools="http://schemas.android.com/tools"
+                                   android:id="@+id/card_view"
+                                   android:layout_width="match_parent"
 
-    android:layout_height="match_parent"
-    android:layout_margin="10dp"
+                                   android:layout_height="match_parent"
+                                   android:layout_margin="10dp"
 
-    card_view:cardCornerRadius="9dp"
-    card_view:cardUseCompatPadding="true">
+                                   card_view:cardCornerRadius="9dp"
+                                   card_view:cardUseCompatPadding="true">
 
     <RelativeLayout
         android:layout_width="wrap_content"
@@ -129,6 +129,6 @@
 
 
     </RelativeLayout>
-</android.support.v7.widget.CardView>
+</androidx.cardview.widget.CardView>
 
 

@@ -3,7 +3,7 @@ package com.uah_rates.grd.uahrates.ui.screens.dialog
 import android.app.AlertDialog
 import android.app.Dialog
 import android.os.Bundle
-import android.support.v7.app.AppCompatDialogFragment
+import androidx.appcompat.app.AppCompatDialogFragment
 import android.text.SpannableString
 import android.view.View
 import com.uah_rates.grd.uahrates.R

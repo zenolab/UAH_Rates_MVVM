@@ -2,10 +2,10 @@ package com.uah_rates.grd.uahrates.settings;
 
 import android.content.SharedPreferences;
 import android.os.Bundle;
-import android.support.v7.preference.ListPreference;
-import android.support.v7.preference.Preference;
-import android.support.v7.preference.PreferenceFragmentCompat;
-import android.support.v7.preference.PreferenceManager;
+import androidx.preference.ListPreference;
+import androidx.preference.Preference;
+import androidx.preference.PreferenceFragmentCompat;
+import androidx.preference.PreferenceManager;
 import com.uah_rates.grd.uahrates.Invariance;
 import com.uah_rates.grd.uahrates.R;
 

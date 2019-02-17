@@ -1,6 +1,6 @@
 package com.uah_rates.grd.uahrates.model;
 
-import android.arch.lifecycle.LiveData;
+import androidx.lifecycle.LiveData;
 import com.uah_rates.grd.uahrates.viewmodel.interactor.ApiResponse;
 
 

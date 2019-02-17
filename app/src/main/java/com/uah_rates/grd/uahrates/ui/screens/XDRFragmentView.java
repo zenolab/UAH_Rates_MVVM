@@ -2,7 +2,7 @@ package com.uah_rates.grd.uahrates.ui.screens;
 
 
 import android.os.Bundle;
-import android.support.v7.app.AppCompatDialogFragment;
+import androidx.appcompat.app.AppCompatDialogFragment;
 import android.view.*;
 import com.uah_rates.grd.uahrates.R;
 import com.uah_rates.grd.uahrates.ui.screens.dialog.InformerXDR;

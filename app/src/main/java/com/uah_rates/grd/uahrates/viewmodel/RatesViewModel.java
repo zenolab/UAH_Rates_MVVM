@@ -1,16 +1,13 @@
 package com.uah_rates.grd.uahrates.viewmodel;
 
-import android.arch.lifecycle.LiveData;
-import android.arch.lifecycle.MediatorLiveData;
-import android.arch.lifecycle.ViewModel;
-import android.support.annotation.NonNull;
+import androidx.lifecycle.LiveData;
+import androidx.lifecycle.MediatorLiveData;
+import androidx.lifecycle.ViewModel;
+import androidx.annotation.NonNull;
 import android.util.Log;
-import com.uah_rates.grd.uahrates.model.pojo.Rate;
 import com.uah_rates.grd.uahrates.viewmodel.interactor.ApiResponse;
 import com.uah_rates.grd.uahrates.model.RateRepository;
 import com.uah_rates.grd.uahrates.model.RateRepositoryImpl;
-
-import java.util.List;
 
 
 public class RatesViewModel extends ViewModel {

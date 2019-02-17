@@ -15,7 +15,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical"
-        tools:context=".graph.ChartActivity">
+        tools:context=".presentation.ui.ChartActivity">
 
     <com.uah_chart.zenolab.chart.LineChartView
             android:id="@+id/linechart"

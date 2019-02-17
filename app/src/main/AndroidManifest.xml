@@ -15,7 +15,7 @@
             android:supportsRtl="true"
             android:theme="@style/AppTheme">
         <activity
-                android:name=".ui.MainActivity"
+                android:name="com.uah_rates.grd.uahrates.presentation.ui.MainActivity"
                 android:configChanges="orientation|keyboardHidden|screenSize"
                 android:label="@string/app_name"
                 android:theme="@style/AppTheme.NoActionBar">
@@ -24,7 +24,7 @@
             </intent-filter>
         </activity>
         <activity
-                android:name=".SplashActivity"
+                android:name=".presentation.ui.SplashActivity"
                 android:configChanges="orientation|keyboardHidden|screenSize"
                 android:theme="@style/SplashTheme">
             <intent-filter>
@@ -33,10 +33,10 @@
                 <category android:name="android.intent.category.LAUNCHER"/>
             </intent-filter>
         </activity>
-        <activity android:name=".graph.ChartActivity">
+        <activity android:name=".presentation.ui.ChartActivity">
         </activity>
         <activity
-                android:name=".ui.BaseActivity"
+                android:name=".presentation.ui.BaseActivity"
                 android:label="@string/title_activity_base"
                 android:theme="@style/AppTheme.NoActionBar">
         </activity>

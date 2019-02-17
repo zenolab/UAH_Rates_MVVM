@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     android:background="#ff6262"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    tools:context=".ui.screens.XDRFragmentView"
+    tools:context=".presentation.ui.screens.XDRFragmentView"
     >
 
 </FrameLayout>

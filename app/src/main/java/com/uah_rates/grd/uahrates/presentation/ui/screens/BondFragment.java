@@ -20,7 +20,7 @@ import java.util.List;
 
 import com.uah_rates.grd.uahrates.R;
 import com.uah_rates.grd.uahrates.presentation.ui.adapter.BoundAdapter;
-import com.uah_rates.grd.uahrates.domain.interactor.model.pojo.Bond;
+import com.uah_rates.grd.uahrates.domain.model.pojo.Bond;
 import com.uah_rates.grd.uahrates.presentation.ui.viewmodel.BondsViewModel;
 
 // bonds of domestic government loans - облигации государственных государственных займов
@@ -28,7 +28,7 @@ public class BondFragment extends Fragment {
 
     public static String LOG_TAG = "BondFragment_log";
 
-    ProgressDialog progressDoalog;
+    ProgressDialog progressDialog;
     private RecyclerView recyclerView;
     private SwipeRefreshLayout mSwipeRefreshLayout;
     private BoundAdapter adapter;
@@ -43,7 +43,7 @@ public class BondFragment extends Fragment {
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container,
                              @Nullable Bundle savedInstanceState) {
 
-        View view =   inflater.inflate(R.layout.bond_fragment, container, false);
+        View view = inflater.inflate(R.layout.bond_fragment, container, false);
 
         recyclerView = (RecyclerView) view.findViewById(R.id.recyclerViewBond);
         recyclerView.setHasFixedSize(true);
@@ -60,7 +60,7 @@ public class BondFragment extends Fragment {
             @Override
             public void onRefresh() {
                 mSwipeRefreshLayout.setRefreshing(true);
-                ( new Handler()).postDelayed(new Runnable() {
+                (new Handler()).postDelayed(new Runnable() {
 
                     @Override
                     public void run() {
@@ -80,7 +80,7 @@ public class BondFragment extends Fragment {
         // TODO: Use the ViewModel
         mViewModel = ViewModelProviders.of(this).get(BondsViewModel.class);
         mViewModel.getRates().observe(this, new Observer<List<Bond>>() {
-             // Called when the data is changed.
+            // Called when the data is changed.
             @Override
             public void onChanged(@Nullable List<Bond> bonds) {
                 adapter = new BoundAdapter(getActivity(), bonds);

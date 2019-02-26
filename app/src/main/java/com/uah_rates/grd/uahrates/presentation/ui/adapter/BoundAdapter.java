@@ -8,7 +8,7 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 import com.uah_rates.grd.uahrates.R;
-import com.uah_rates.grd.uahrates.domain.interactor.model.pojo.Bond;
+import com.uah_rates.grd.uahrates.domain.model.pojo.Bond;
 
 
 import java.util.List;

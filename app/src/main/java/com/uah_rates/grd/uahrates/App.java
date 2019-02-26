@@ -3,7 +3,7 @@ package com.uah_rates.grd.uahrates;
 import android.app.Application;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
-import com.uah_rates.grd.uahrates.domain.interactor.ApiResponse;
+
 import okhttp3.OkHttpClient;
 import okhttp3.logging.HttpLoggingInterceptor;
 import retrofit2.Retrofit;
@@ -14,21 +14,7 @@ import java.util.concurrent.TimeUnit;
 
 public class App extends Application {
 
-    //-------------------------------------------------------------------------------------------------------------------
-    public static class CacheResponse {
 
-        private static ApiResponse cacheResponse;
-
-        public static ApiResponse getCacheResponse() {
-            return cacheResponse;
-        }
-
-        public static void setCacheResponse(ApiResponse cacheResponse) {
-            CacheResponse.cacheResponse = cacheResponse;
-        }
-    }
-
-    //-------------------------------------------------------------------------------------------------------------------
     public static class RetrofitClientInstance {
 
         private static Retrofit retrofit;
@@ -62,7 +48,5 @@ public class App extends Application {
         }
 
     }
-    //-------------------------------------------------------------------------------------------------------------------
-
 
 }

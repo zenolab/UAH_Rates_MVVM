@@ -1,30 +1,27 @@
 package com.uah_rates.grd.uahrates.presentation.ui.viewmodel;
 
+import android.util.Log;
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
-import android.util.Log;
 
 
-
+import java.util.Collection;
 import java.util.List;
 
-import com.uah_rates.grd.uahrates.App;
-import com.uah_rates.grd.uahrates.domain.interactor.model.pojo.Bond;
-import com.uah_rates.grd.uahrates.data.ApiService;
-import com.uah_rates.grd.uahrates.domain.interactor.usecase.BondUseCase;
-import com.uah_rates.grd.uahrates.domain.interactor.usecase.BondUseCaseImpl;
-import retrofit2.Call;
-import retrofit2.Callback;
-import retrofit2.Response;
+import com.uah_rates.grd.uahrates.domain.model.pojo.Bond;
+import com.uah_rates.grd.uahrates.domain.interactor.bond.BondUseCaseImpl;
 
 //bonds of domestic government loans - облигации государственных государственных займов
 public class BondsViewModel extends ViewModel {
     // TODO: Implement the ViewModel
 
     private static final String LOG_TAG = BondsViewModel.class.getSimpleName();
+
+
     //Holder for data
     private MutableLiveData<List<Bond>> bondsList;
+
     //LiveData holder
     public LiveData<List<Bond>> getRates() {
 
@@ -40,49 +37,21 @@ public class BondsViewModel extends ViewModel {
         // clean up resources
     }
 
-    //---------------------------------------------Repository------------------------------------------------------------
     private void loadBond() {
-
-        /*
-      try {
-           new BondUseCase() {
-
-               @Override
-               public void getDomainListener(BondUseCaseListener bondUseCaseListener, List<Bond> list) {
-                   bondsList.setValue(list);
-
-               }
-           };
-        }catch (Exception e){
-           Log.d(LOG_TAG,"-- Exception - "+e.getMessage());
-      }
-      */
-
-
         BondUseCaseImpl bondUseCase = new BondUseCaseImpl();
-        bondUseCase.getDomainListener((BondUseCaseListener) this);
+        bondUseCase.getDomainListener(new PresentationListener() {
 
+            @Override
+            public void successfulResponse(List<?> list) {
+                bondsList.setValue((List<Bond>) list);
+            }
 
+            @Override
+            public void errorResponse(String error) {
+                Log.d(LOG_TAG, "-- Error load data " + error);
+            }
+        });
 
-
-//        ApiService service = App.RetrofitClientInstance
-//                .getRetrofitInstance()
-//                .create(ApiService.class);
-//
-//        Call<List<Bond>> call = service.fetchBonds();
-//        call.enqueue(new Callback<List<Bond>>() {
-//
-//            @Override
-//            public void onResponse(Call<List<Bond>> call, Response<List<Bond>> response) {
-//                Log.e(LOG_TAG, "onResponse "+response.body());
-//                bondsList.setValue(response.body());
-//            }
-//
-//            @Override
-//            public void onFailure(Call<List<Bond>> call, Throwable t) {
-//                Log.e(LOG_TAG, "******* > RETROFIT - onFailure "+t.getMessage());
-//            }
-//        });
     }
-    //------------------------------------------------------------------------------------------------------------------
+
 }

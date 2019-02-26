@@ -63,5 +63,4 @@ public class SettingsFragment extends PreferenceFragmentCompat implements Shared
     }
 
 
-
 }

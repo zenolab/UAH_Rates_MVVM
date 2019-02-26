@@ -2,6 +2,7 @@ package com.uah_rates.grd.uahrates.presentation.ui;
 
 import android.content.Intent;
 import android.content.res.Configuration;
+import android.view.Menu;
 import com.google.android.material.navigation.NavigationView;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
@@ -12,15 +13,12 @@ import android.os.Bundle;
 import androidx.appcompat.app.AppCompatDialogFragment;
 import androidx.appcompat.widget.Toolbar;
 import android.util.Log;
-import android.view.Menu;
 import android.view.MenuItem;
 
 import com.uah_rates.grd.uahrates.R;
-import com.uah_rates.grd.uahrates.presentation.ui.halpers.LocalStorage;
-import com.uah_rates.grd.uahrates.presentation.ui.pager.HostFragment;
+import com.uah_rates.grd.uahrates.presentation.ui.halpers.settings.SettingsFragment;
 import com.uah_rates.grd.uahrates.presentation.ui.screens.*;
 import com.uah_rates.grd.uahrates.presentation.ui.screens.dialog.InfoDialogFragment;
-import com.uah_rates.grd.uahrates.presentation.ui.halpers.settings.SettingsFragment;
 
 public  class MainActivity extends BaseActivity implements NavigationView.OnNavigationItemSelectedListener{
 
@@ -45,13 +43,11 @@ public  class MainActivity extends BaseActivity implements NavigationView.OnNavi
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
 
-        new LocalStorage(this);
-
     }//End onCreate()
 
     private void mainView() {
 
-        fragment = new AllRatesFragmentView();
+        fragment = new RateFragmentView();
         FragmentManager fragmentManager = getSupportFragmentManager();
         fragmentManager.beginTransaction().replace(R.id.content_frame, fragment).commit();
     }
@@ -65,19 +61,14 @@ public  class MainActivity extends BaseActivity implements NavigationView.OnNavi
 
         int id = item.getItemId();
 
-        if (id == R.id.nav_camera) {
-            fragment = new HostFragment();
+        if (id == R.id.nav_currency) {
+            fragment = new RateFragmentView();
             setTitle("Currencies/Metals");
-        } else if (id == R.id.nav_gallery) {
-            fragment = new AllRatesFragmentView();
-            setTitle("All quotes");
-        } else if (id == R.id.nav_slideshow) {
-             fragment = new XDRFragmentView();
-            setTitle("XDR");
         } else if (id == R.id.nav_bond) {
-            setTitle("Bond");
             fragment = new BondFragment();
-        } else if (id == R.id.nav_manage) {
+            setTitle("Bond");
+        }
+          else if (id == R.id.nav_manage) {
             fragment = new SettingsFragment();
             setTitle("Menu");
         } else if (id == R.id.nav_share) {
@@ -87,6 +78,8 @@ public  class MainActivity extends BaseActivity implements NavigationView.OnNavi
             setTitle("Google Play");
             fragment = new PlayStoreFragmentView();
         }
+
+
 
         if (fragment != null) {
             fragmentManager.beginTransaction().replace(R.id.content_frame, fragment).commit();

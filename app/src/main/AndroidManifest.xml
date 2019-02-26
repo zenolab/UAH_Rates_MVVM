@@ -33,8 +33,6 @@
                 <category android:name="android.intent.category.LAUNCHER"/>
             </intent-filter>
         </activity>
-        <activity android:name=".presentation.ui.ChartActivity">
-        </activity>
         <activity
                 android:name=".presentation.ui.BaseActivity"
                 android:label="@string/title_activity_base"

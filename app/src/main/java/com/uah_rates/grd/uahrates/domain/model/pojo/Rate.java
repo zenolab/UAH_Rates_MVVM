@@ -1,9 +1,12 @@
-package com.uah_rates.grd.uahrates.data.entity;
+package com.uah_rates.grd.uahrates.domain.model.pojo;
 
 import com.google.gson.annotations.SerializedName;
 
-public final class EntityRate {
+//POJO should not have to extend class or implement interface
+public final class Rate
+{
 
+    //code  of rate
     @SerializedName("r030")
     public Integer r030;
 
@@ -19,7 +22,7 @@ public final class EntityRate {
     @SerializedName("exchangedate")
     public String exchangedate;
 
-    public EntityRate(Integer r030, String txt, Float rate, String cc, String exchangedate) {
+    public Rate(Integer r030, String txt, Float rate, String cc, String exchangedate) {
         this.r030 = r030;
         this.txt = txt;
         this.rate = rate;
@@ -68,5 +71,6 @@ public final class EntityRate {
     public void setExchangedate(String exchangedate) {
         this.exchangedate = exchangedate;
     }
+
 
 }

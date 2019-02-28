@@ -9,6 +9,8 @@ import androidx.preference.PreferenceManager;
 import com.uah_rates.grd.uahrates.Invariance;
 import com.uah_rates.grd.uahrates.R;
 
+import java.util.Objects;
+
 public class SettingsFragment extends PreferenceFragmentCompat implements SharedPreferences.OnSharedPreferenceChangeListener {
 
 
@@ -18,8 +20,8 @@ public class SettingsFragment extends PreferenceFragmentCompat implements Shared
     @Override
     public void onCreatePreferences(Bundle bundle, String s) {
         addPreferencesFromResource(R.xml.preferences);
-        sharedPreferences = PreferenceManager.getDefaultSharedPreferences(getActivity());
-        onSharedPreferenceChanged(sharedPreferences, Invariance.SETTINGS_KEY);
+        sharedPreferences = PreferenceManager.getDefaultSharedPreferences(Objects.requireNonNull(getActivity()));
+        onSharedPreferenceChanged(sharedPreferences, Invariance.SP_STORAGE_KEY);
     }
 
     /**
@@ -60,6 +62,13 @@ public class SettingsFragment extends PreferenceFragmentCompat implements Shared
         super.onPause();
         getPreferenceScreen().getSharedPreferences()
                 .unregisterOnSharedPreferenceChangeListener(this);
+    }
+
+
+    @Override
+    public void onDestroy(){
+        super.onDestroy();
+
     }
 
 

@@ -20,7 +20,7 @@ public class RateRepository  {
     }
 
 
-    protected  void getData(RateListener asyncListener) {
+    private void getData(RateListener asyncListener) {
         ApiService service = App.RetrofitClientInstance
                 .getRetrofitInstance()
                 .create(ApiService.class);

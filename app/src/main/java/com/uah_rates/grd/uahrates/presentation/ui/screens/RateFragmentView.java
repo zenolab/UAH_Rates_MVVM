@@ -20,18 +20,13 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.uah_rates.grd.uahrates.R;
 import com.uah_rates.grd.uahrates.presentation.ui.adapter.DataAdapter;
 import com.uah_rates.grd.uahrates.presentation.ui.viewmodel.UAHViewModel;
-
-
 import java.util.List;
 
-
-//public class RateFragmentView extends BaseRateFragment {
 public class RateFragmentView extends Fragment {
 
     private final String LOG_TAG = RateFragmentView.class.getName();
 
     ProgressDialog progressDiaalog;
-    private SearchView searchView = null;
     private RecyclerView recyclerView;
     private UAHViewModel viewModel;
     protected DataAdapter dataAdapter;
@@ -43,7 +38,7 @@ public class RateFragmentView extends Fragment {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setHasOptionsMenu(true);
+        setHasOptionsMenu(false);
     }
 
     @Nullable
@@ -65,7 +60,6 @@ public class RateFragmentView extends Fragment {
     @Override
     public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
         inflater.inflate(R.menu.menu_main, menu);
-
         super.onCreateOptionsMenu(menu, inflater);
 
     }
@@ -74,7 +68,6 @@ public class RateFragmentView extends Fragment {
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
             case R.id.action_search:
-                // Not implemented here
                 return false;
             default:
                 break;

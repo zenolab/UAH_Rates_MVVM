@@ -9,21 +9,18 @@ import androidx.lifecycle.ViewModel;
 import java.util.Collection;
 import java.util.List;
 
-import com.uah_rates.grd.uahrates.domain.model.pojo.Bond;
-import com.uah_rates.grd.uahrates.domain.interactor.bond.BondUseCaseImpl;
+import com.uah_rates.grd.uahrates.domain.interactor.BondUseCaseImpl;
 
 //bonds of domestic government loans - облигации государственных государственных займов
 public class BondsViewModel extends ViewModel {
-    // TODO: Implement the ViewModel
 
     private static final String LOG_TAG = BondsViewModel.class.getSimpleName();
 
-
     //Holder for data
-    private MutableLiveData<List<Bond>> bondsList;
+    private MutableLiveData<List<?>> bondsList;
 
     //LiveData holder
-    public LiveData<List<Bond>> getRates() {
+    public LiveData<List<?>> getRates() {
 
         if (bondsList == null) {
             bondsList = new MutableLiveData<>();
@@ -41,9 +38,10 @@ public class BondsViewModel extends ViewModel {
         BondUseCaseImpl bondUseCase = new BondUseCaseImpl();
         bondUseCase.getDomainListener(new PresentationListener() {
 
+
             @Override
-            public void successfulResponse(List<?> list) {
-                bondsList.setValue((List<Bond>) list);
+            public void successfulResponse(Collection<?> collection) {
+                bondsList.setValue((List<?>) collection);
             }
 
             @Override

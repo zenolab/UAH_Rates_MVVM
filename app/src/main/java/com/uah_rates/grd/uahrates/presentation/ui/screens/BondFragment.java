@@ -34,7 +34,7 @@ public class BondFragment extends Fragment {
     private BoundAdapter adapter;
     private BondsViewModel mViewModel;
 
-    //
+
     public static BondFragment newInstance() {
         return new BondFragment();
     }
@@ -79,11 +79,11 @@ public class BondFragment extends Fragment {
         super.onActivityCreated(savedInstanceState);
         // TODO: Use the ViewModel
         mViewModel = ViewModelProviders.of(this).get(BondsViewModel.class);
-        mViewModel.getRates().observe(this, new Observer<List<Bond>>() {
+        mViewModel.getRates().observe(this, new Observer<List<?>>() {
             // Called when the data is changed.
             @Override
-            public void onChanged(@Nullable List<Bond> bonds) {
-                adapter = new BoundAdapter(getActivity(), bonds);
+            public void onChanged(@Nullable List<?> bonds) {
+                adapter = new BoundAdapter(getActivity(), (List<Bond>) bonds);
                 recyclerView.setAdapter(adapter);
             }
         });

@@ -4,8 +4,7 @@ import android.util.Log;
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
-import com.uah_rates.grd.uahrates.domain.interactor.rate.RateUseCaseImpl;
-import com.uah_rates.grd.uahrates.domain.model.pojo.Rate;
+import com.uah_rates.grd.uahrates.domain.interactor.RateUseCaseImpl;
 
 import java.util.Collection;
 import java.util.List;
@@ -36,10 +35,10 @@ public class UAHViewModel extends ViewModel {
         RateUseCaseImpl bondUseCase = new RateUseCaseImpl();
         bondUseCase.getDomainListener(new PresentationListener() {
 
+
             @Override
-            public void successfulResponse(List<?> list) {
-                Log.d(LOG_TAG, "-- LIST SIZE " + list.size());
-                listMutableLiveData.setValue(list);
+            public void successfulResponse(Collection<?> collection) {
+                listMutableLiveData.setValue((List<?>) collection);
             }
 
             @Override

@@ -37,7 +37,6 @@ class SplashActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-     //   setContentView(R.layout.activity_splash)
         loadPref();
 
         mDelayHandler = Handler()
@@ -48,7 +47,7 @@ class SplashActivity : AppCompatActivity() {
     private fun loadPref() {
 
         sharedPreferences = PreferenceManager.getDefaultSharedPreferences(this)
-        val prefValue = sharedPreferences!!.getString(Invariance.SETTINGS_KEY, "")
+        val prefValue = sharedPreferences!!.getString(Invariance.SP_STORAGE_KEY, "")
 
         if (prefValue == "Off") {
             SPLASH_DELAY = 0
@@ -71,21 +70,16 @@ class SplashActivity : AppCompatActivity() {
         valueAnimator.duration = ANIMATION_DURATION
 
         // Set animator listener.
-       // val intent = Intent(this,  MainActivity::class.java)
         valueAnimator.addListener(object : Animator.AnimatorListener {
             override fun onAnimationRepeat(p0: Animator?) {}
 
             override fun onAnimationEnd(p0: Animator?) {
-                // Navigate to main activity on navigation end.
-//                startActivity(intent)
-//                finish()
                 mDelayHandler = Handler()
                 mDelayHandler!!.postDelayed(mRunnable, SPLASH_DELAY)
             }
             override fun onAnimationCancel(p0: Animator?) {}
             override fun onAnimationStart(p0: Animator?) {}
         })
-        // Start animation.
         valueAnimator.start()
     }
 

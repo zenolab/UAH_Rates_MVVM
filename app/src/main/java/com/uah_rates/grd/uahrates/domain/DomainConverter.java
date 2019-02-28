@@ -10,9 +10,6 @@ import java.util.List;
 
 public class DomainConverter {
 
-    // In default java
-    // simple type recreate in memory !
-    // objects copy links !
     public static Bond bondRESTModelConverter(EntityBond entityBond) {
 
         String auctiondate = entityBond.getAuctiondate();

@@ -43,7 +43,6 @@ public class BoundAdapter extends RecyclerView.Adapter<BoundAdapter.CustomViewHo
 
 
     public void setData(List<Bond> data) {
-        //  this.dataRx.addAll(data);
         this.dataList.addAll(data);
         notifyDataSetChanged();
     }

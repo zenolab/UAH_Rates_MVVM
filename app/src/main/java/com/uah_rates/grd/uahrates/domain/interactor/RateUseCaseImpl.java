@@ -1,8 +1,7 @@
-package com.uah_rates.grd.uahrates.domain.interactor.rate;
+package com.uah_rates.grd.uahrates.domain.interactor;
 
 import android.util.Log;
 import com.uah_rates.grd.uahrates.data.entity.EntityRate;
-import com.uah_rates.grd.uahrates.data.repository.DataCallbackListener;
 import com.uah_rates.grd.uahrates.data.repository.rate.RateListener;
 import com.uah_rates.grd.uahrates.data.repository.rate.RateRepository;
 import com.uah_rates.grd.uahrates.domain.DomainConverter;
@@ -10,10 +9,9 @@ import com.uah_rates.grd.uahrates.domain.model.pojo.Rate;
 import com.uah_rates.grd.uahrates.presentation.ui.viewmodel.PresentationListener;
 
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.List;
 
-public class RateUseCaseImpl implements RateUseCase {
+public class RateUseCaseImpl implements UseCase {
 
     private static final String LOG_TAG = RateUseCaseImpl.class.getSimpleName();
 

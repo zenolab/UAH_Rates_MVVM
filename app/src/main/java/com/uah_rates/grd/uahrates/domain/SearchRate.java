@@ -1,6 +1,6 @@
 package com.uah_rates.grd.uahrates.domain;
 
-import android.util.Log;
+
 import com.uah_rates.grd.uahrates.domain.model.pojo.Rate;
 
 import java.util.ArrayList;
@@ -26,10 +26,8 @@ public class SearchRate {
         } else {
             List<Rate> filteredList = new ArrayList<>();
             for (Rate row : rateList) {
-                Log.e(LOG_TAG, "row " + row.getCc().toLowerCase().contains(charString.toLowerCase()));
                 if (row.getCc().toLowerCase().contains(charString.toLowerCase()) | row.getTxt().toLowerCase().contains(charString.toLowerCase())) {
                     filteredList.add(row);
-                    Log.e(LOG_TAG, "filteredList " + filteredList.size());
                 }
             }
 

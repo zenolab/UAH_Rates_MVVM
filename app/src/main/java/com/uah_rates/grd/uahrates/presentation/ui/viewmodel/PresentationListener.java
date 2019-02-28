@@ -8,8 +8,7 @@ import java.util.List;
 
 public interface PresentationListener {
 
-    //void successfulResponse(Collection<?> collection);
-    void successfulResponse(List<?> list);
+    void successfulResponse(Collection<?> collection);
 
     void errorResponse(String error);
 

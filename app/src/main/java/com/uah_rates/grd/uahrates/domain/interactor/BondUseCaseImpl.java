@@ -1,8 +1,7 @@
-package com.uah_rates.grd.uahrates.domain.interactor.bond;
+package com.uah_rates.grd.uahrates.domain.interactor;
 
 import android.util.Log;
 import com.uah_rates.grd.uahrates.data.entity.EntityBond;
-import com.uah_rates.grd.uahrates.data.repository.DataCallbackListener;
 import com.uah_rates.grd.uahrates.data.repository.bond.BondListener;
 import com.uah_rates.grd.uahrates.data.repository.bond.BondRepository;
 import com.uah_rates.grd.uahrates.domain.DomainConverter;
@@ -10,10 +9,9 @@ import com.uah_rates.grd.uahrates.domain.model.pojo.Bond;
 import com.uah_rates.grd.uahrates.presentation.ui.viewmodel.PresentationListener;
 
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.List;
 
-public class BondUseCaseImpl implements BondUseCase {
+public class BondUseCaseImpl implements UseCase {
 
     private static final String LOG_TAG = BondUseCaseImpl.class.getSimpleName();
 

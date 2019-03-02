@@ -14,8 +14,6 @@ import java.util.concurrent.TimeUnit;
 
 public class App extends Application {
 
-
-
    //-------------------------------------------------------------------------------------------------------------------
    public static class CacheResponse {
 

@@ -38,7 +38,7 @@ public class BondsViewModel extends ViewModel {
         // clean up resources
     }
 
-    //---------------------------------------------Repositor------------------------------------------------------------
+    //---------------------------------------------Repository------------------------------------------------------------
     private void loadRates() {
 
         ApiService service = App.RetrofitClientInstance

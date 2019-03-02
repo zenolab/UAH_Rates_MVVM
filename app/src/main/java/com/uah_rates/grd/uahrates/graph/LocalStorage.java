@@ -27,9 +27,8 @@ public class LocalStorage {
     private int[] dataRangeArray = new int[10];
 
     private Map<Integer, List<Rate>> linkedHashMap = new LinkedHashMap<Integer, List<Rate>>(10, 0.75f, true);
-    public static Map<Integer, List<Rate>> scopeAppLinkedHashMap = new LinkedHashMap<Integer, List<Rate>>(10, 0.75f, true);
-
     private Map<Integer, io.reactivex.Observable<List<Rate>>> hashMap10 = new HashMap<Integer, io.reactivex.Observable<List<Rate>>>();
+    public static Map<Integer, List<Rate>> scopeAppLinkedHashMap = new LinkedHashMap<Integer, List<Rate>>(10, 0.75f, true);
     private List<Observable<List<Rate>>> observables;
 
     private ApiService service;
@@ -57,7 +56,6 @@ public class LocalStorage {
             dataRangeArray[i] = baseDate;
         }
         getRepository();
-       // showHistory(getData(SP_STORAGE_KEY)); // test
 
     }
 

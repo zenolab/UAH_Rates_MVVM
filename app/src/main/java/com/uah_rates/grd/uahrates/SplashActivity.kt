@@ -9,7 +9,6 @@ import android.os.Bundle
 import android.os.Handler
 import androidx.preference.PreferenceManager
 import android.view.animation.BounceInterpolator
-import com.uah_rates.grd.uahrates.graph.LocalStorage
 
 import com.uah_rates.grd.uahrates.ui.MainActivity
 import kotlinx.android.synthetic.main.activity_splash.*
@@ -37,7 +36,6 @@ class SplashActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-     //   setContentView(R.layout.activity_splash)
         loadPref();
 
         mDelayHandler = Handler()

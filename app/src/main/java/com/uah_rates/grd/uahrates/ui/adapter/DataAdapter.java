@@ -22,8 +22,6 @@ public class DataAdapter extends RecyclerView.Adapter<DataAdapter.Holder>{
     private List<Rate> tempList;
     private List<Rate> ratesListSorted;
     public Map<Integer,Integer> tickerMap;
-   // private RecyclerViewClickListener mListener;
-
     private  int template ;
 
 

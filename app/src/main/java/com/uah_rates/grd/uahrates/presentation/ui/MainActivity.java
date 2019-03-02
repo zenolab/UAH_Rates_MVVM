@@ -16,7 +16,7 @@ import android.util.Log;
 import android.view.MenuItem;
 
 import com.uah_rates.grd.uahrates.R;
-import com.uah_rates.grd.uahrates.presentation.ui.halpers.settings.SettingsFragment;
+import com.uah_rates.grd.uahrates.presentation.ui.settings.SettingsFragment;
 import com.uah_rates.grd.uahrates.presentation.ui.screens.*;
 import com.uah_rates.grd.uahrates.presentation.ui.screens.dialog.InfoDialogFragment;
 

@@ -47,7 +47,7 @@ class SplashActivity : AppCompatActivity() {
     private fun loadPref() {
 
         sharedPreferences = PreferenceManager.getDefaultSharedPreferences(this)
-        val prefValue = sharedPreferences!!.getString(Invariance.SP_STORAGE_KEY, "")
+        val prefValue = sharedPreferences!!.getString(R.string.screen_launcher_key.toString(), "")
 
         if (prefValue == "Off") {
             SPLASH_DELAY = 0

@@ -1,4 +1,4 @@
-package com.uah_rates.grd.uahrates.presentation.ui.halpers.settings;
+package com.uah_rates.grd.uahrates.presentation.ui.settings;
 
 import android.content.SharedPreferences;
 import android.os.Bundle;
@@ -6,7 +6,6 @@ import androidx.preference.ListPreference;
 import androidx.preference.Preference;
 import androidx.preference.PreferenceFragmentCompat;
 import androidx.preference.PreferenceManager;
-import com.uah_rates.grd.uahrates.Invariance;
 import com.uah_rates.grd.uahrates.R;
 
 import java.util.Objects;
@@ -21,7 +20,7 @@ public class SettingsFragment extends PreferenceFragmentCompat implements Shared
     public void onCreatePreferences(Bundle bundle, String s) {
         addPreferencesFromResource(R.xml.preferences);
         sharedPreferences = PreferenceManager.getDefaultSharedPreferences(Objects.requireNonNull(getActivity()));
-        onSharedPreferenceChanged(sharedPreferences, Invariance.SP_STORAGE_KEY);
+        onSharedPreferenceChanged(sharedPreferences, getString(R.string.screen_launcher_key));
     }
 
     /**

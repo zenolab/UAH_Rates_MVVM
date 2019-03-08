@@ -7,7 +7,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 import com.uah_rates.grd.uahrates.R;
-import com.uah_rates.grd.uahrates.domain.model.pojo.Bond;
 import com.uah_rates.grd.uahrates.domain.model.pojo.Rate;
 
 import java.util.*;
@@ -23,7 +22,7 @@ public class DataAdapter extends RecyclerView.Adapter<DataAdapter.Holder> {
     public DataAdapter(List<?> list) {
         Log.d(LOG_TAG, "-- LIST SIZE " + list.size());
         this.list = (List<? extends Rate>) list;
-        // this.list2= list;
+
     }
 
 
@@ -68,7 +67,7 @@ public class DataAdapter extends RecyclerView.Adapter<DataAdapter.Holder> {
         public void onBind(Holder holder, int position) {
 
             holder.mTextViewTitle.setText(list.get(position).getTxt());
-            holder.mTextViewСс.setText(list.get(position).getCc());
+            holder.mTextViewСс.setText(list.get(position).getAcronym());
             holder.mTextViewRate.setText(Float.toString(list.get(position).getRate()));
             holder.mTextViewExchangedate.setText(list.get(position).getExchangedate());
 

@@ -4,7 +4,7 @@ import com.google.gson.annotations.SerializedName;
 
 public final class EntityRate {
 
-    @SerializedName("r030")
+    @SerializedName("code")
     public Integer r030;
 
     @SerializedName("txt")
@@ -13,7 +13,7 @@ public final class EntityRate {
     @SerializedName("rate")
     public Float rate;
 
-    @SerializedName("cc")
+    @SerializedName("acronym")
     public String cc;
 
     @SerializedName("exchangedate")
@@ -45,7 +45,6 @@ public final class EntityRate {
     }
 
     public Float getRate() {
-
         return rate;
     }
 
@@ -70,3 +69,14 @@ public final class EntityRate {
     }
 
 }
+
+/*
+[
+        {
+        "code":36,"txt":"Австралійський долар","rate":18.573267,"acronym":"AUD","exchangedate":"11.03.2019"
+        }
+        ,{
+        "code":124,"txt":"Канадський долар","rate":19.657148,"acronym":"CAD","exchangedate":"11.03.2019"
+        }
+]
+*/

@@ -14,15 +14,15 @@ import static com.uah_rates.grd.uahrates.presentation.ui.screens.BondFragment.LO
 
 public class BondRepository {
 
+    BondListener listener;
+
     public BondRepository(BondListener listener) {
-        getData(listener);
+        this.listener = listener;
     }
 
-    protected <T extends BondListener> void getData(T asyncListener) {
+    public void getData() {
 
-               ApiService service = App.RetrofitClientInstance
-                .getRetrofitInstance()
-                .create(ApiService.class);
+        ApiService service = App.RetrofitClientInstance.getRetrofitInstance().create(ApiService.class);
 
         Call<List<EntityBond>> call = service.fetchBonds();
         call.enqueue(new Callback<List<EntityBond>>() {
@@ -30,13 +30,13 @@ public class BondRepository {
             @Override
             public void onResponse(Call<List<EntityBond>> call, Response<List<EntityBond>> response) {
                 Log.e(LOG_TAG, "onResponse " + response.body());
-                asyncListener.onSuccessAnswerOfBond(response.body());
+                listener.onSuccessAnswerOfBond(response.body());
             }
 
             @Override
             public void onFailure(Call<List<EntityBond>> call, Throwable t) {
                 Log.e(LOG_TAG, "RETROFIT - onFailure " + t.getMessage());
-                asyncListener.onError("Repository error load data");
+                listener.onError("Repository error load data");
             }
         });
 

@@ -11,30 +11,33 @@ import com.uah_rates.grd.uahrates.presentation.ui.viewmodel.PresentationListener
 import java.util.ArrayList;
 import java.util.List;
 
-public class BondUseCaseImpl implements UseCase {
+public class BondUseCaseImpl<P extends PresentationListener> implements UseCase {
 
     private static final String LOG_TAG = BondUseCaseImpl.class.getSimpleName();
+
+    private P listener;
 
     public BondUseCaseImpl() {
 
     }
 
     @Override
-    public void getDomainListener(PresentationListener presentationListener) {
-        getData(presentationListener);
+    public <L> void setDomainListener(L listener) {
+        this.listener = (P) listener;
+        getRepository( );
     }
 
-    private void getData(PresentationListener presentationListener) {
+    private void getRepository() {
         new BondRepository(new BondListener() {
             @Override
             public void onSuccessAnswerOfBond(List<EntityBond> data) {
-                presentationListener.successfulResponse(listAdapter(data));
+                listener.successfulResponse(listAdapter(data));
             }
 
             @Override
             public void onErrorCodeAnswer(int code) {
                 Log.e(LOG_TAG, "--- Error code " + code);
-                presentationListener.errorResponse("Error code" + code);
+                listener.errorResponse("Error code" + code);
             }
 
             @Override
@@ -46,8 +49,8 @@ public class BondUseCaseImpl implements UseCase {
                 List<Bond> bondList = new ArrayList<Bond>(data.size());
                 Thread t = new Thread(new Runnable() {
                     public void run() {
-                        for (EntityBond current : data) {
-                            bondList.add(DomainConverter.bondRESTModelConverter(current));
+                        for (EntityBond entity : data) {
+                            bondList.add(DomainConverter.bondRESTModelConverter(entity));
                         }
                     }
                 });
@@ -55,7 +58,7 @@ public class BondUseCaseImpl implements UseCase {
                 return bondList;
             }
 
-        });
+        }).getData();
 
     }
 

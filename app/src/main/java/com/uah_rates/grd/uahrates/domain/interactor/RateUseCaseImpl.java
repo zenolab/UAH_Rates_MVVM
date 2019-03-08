@@ -15,15 +15,18 @@ public class RateUseCaseImpl implements UseCase {
 
     private static final String LOG_TAG = RateUseCaseImpl.class.getSimpleName();
 
+    private PresentationListener presentationListener;
+
     public RateUseCaseImpl() {
     }
 
     @Override
-    public void getDomainListener(PresentationListener presentationListener) {
-        getData(presentationListener);
+    public <L> void setDomainListener(L listener) {
+        this.presentationListener = (PresentationListener) listener;
+        getRepository();
     }
 
-    private void getData(PresentationListener presentationListener) {
+    private void getRepository() {
         new RateRepository(new RateListener() {
 
 
@@ -47,15 +50,17 @@ public class RateUseCaseImpl implements UseCase {
                 List<Rate> rateList = new ArrayList<Rate>(data.size());
                 Thread t = new Thread(new Runnable() {
                     public void run() {
-                        for (EntityRate current : data) {
-                            rateList.add(DomainConverter.rateRESTModelConverter(current));
+                        for (EntityRate entity : data) {
+                            rateList.add(DomainConverter.rateRESTModelConverter(entity));
                         }
                     }
                 });
                 t.start();
                 return rateList;
             }
-        });
+        }).getData();
 
     }
+
+
 }

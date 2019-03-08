@@ -1,42 +1,31 @@
 package com.uah_rates.grd.uahrates.domain.model.pojo;
 
-import com.google.gson.annotations.SerializedName;
 
-//POJO should not have to extend class or implement interface
 public final class Rate
 {
 
-    //code  of rate
-    @SerializedName("r030")
-    public Integer r030;
 
-    @SerializedName("txt")
+    public Integer code;
     public String txt;
-
-    @SerializedName("rate")
     public Float rate;
-
-    @SerializedName("cc")
-    public String cc;
-
-    @SerializedName("exchangedate")
+    public String acronym;
     public String exchangedate;
 
-    public Rate(Integer r030, String txt, Float rate, String cc, String exchangedate) {
-        this.r030 = r030;
+    public Rate(Integer code, String txt, Float rate, String acronym, String exchangedate) {
+        this.code = code;
         this.txt = txt;
         this.rate = rate;
-        this.cc = cc;
+        this.acronym = acronym;
         this.exchangedate = exchangedate;
     }
 
 
-    public Integer getR030() {
-        return r030;
+    public Integer getCode() {
+        return code;
     }
 
-    public void setR030(Integer r030) {
-        this.r030 = r030;
+    public void setCode(Integer code) {
+        this.code = code;
     }
 
     public String getTxt() {
@@ -56,12 +45,12 @@ public final class Rate
         this.rate = rate;
     }
 
-    public String getCc() {
-        return cc;
+    public String getAcronym() {
+        return acronym;
     }
 
-    public void setCc(String cc) {
-        this.cc = cc;
+    public void setAcronym(String acronym) {
+        this.acronym = acronym;
     }
 
     public String getExchangedate() {

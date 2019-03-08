@@ -15,12 +15,15 @@ public class RateRepository  {
 
     private static final String LOG_TAG = RateRepository.class.getSimpleName();
 
+    RateListener listener;
+
     public RateRepository(RateListener listener) {
-        getData(listener);
+
+        this.listener = listener;
     }
 
 
-    private void getData(RateListener asyncListener) {
+    public void getData() {
         ApiService service = App.RetrofitClientInstance
                 .getRetrofitInstance()
                 .create(ApiService.class);
@@ -31,13 +34,13 @@ public class RateRepository  {
             @Override
             public void onResponse(Call<List<EntityRate>> call, Response<List<EntityRate>> response) {
                 Log.e(LOG_TAG, "onResponse " + response.body());
-                asyncListener.onSuccessAnswerOfRate(response.body());
+                listener.onSuccessAnswerOfRate(response.body());
             }
 
             @Override
             public void onFailure(Call<List<EntityRate>> call, Throwable t) {
                 Log.e(LOG_TAG, "onFailure " + t.getMessage());
-                asyncListener.onError("Repository error load data");
+                listener.onError("Repository error load data");
             }
         });
     }

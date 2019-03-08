@@ -43,14 +43,7 @@ public class DomainConverter {
 
     }
 
-    public static Rate rateRESTModelConverter(EntityRate current) {
-
-        Integer r030 = current.r030;
-        String txt = current.txt;
-        Float rate = current.rate;
-        String cc = current.cc;
-        String exchangedate = current.exchangedate;
-
-        return new Rate(r030, txt, rate, cc, exchangedate);
+    public static Rate rateRESTModelConverter(EntityRate entityRate) {
+        return new Rate(entityRate.r030, entityRate.txt, entityRate.rate, entityRate.cc, entityRate.exchangedate);
     }
 }

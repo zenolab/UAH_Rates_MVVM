@@ -1,7 +1,7 @@
 package com.uah_rates.grd.uahrates.domain.model.pojo;
 
 
-//POJO should not have to extend class or implement interface
+
 public final class Bond {
 
 

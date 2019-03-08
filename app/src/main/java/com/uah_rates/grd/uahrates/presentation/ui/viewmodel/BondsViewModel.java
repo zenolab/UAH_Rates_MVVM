@@ -35,8 +35,8 @@ public class BondsViewModel extends ViewModel {
     }
 
     private void loadBond() {
-        BondUseCaseImpl bondUseCase = new BondUseCaseImpl();
-        bondUseCase.getDomainListener(new PresentationListener() {
+        BondUseCaseImpl<PresentationListener> bondUseCase = new BondUseCaseImpl<PresentationListener>();
+        bondUseCase.setDomainListener(new PresentationListener() {
 
 
             @Override

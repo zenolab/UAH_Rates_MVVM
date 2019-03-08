@@ -32,8 +32,8 @@ public class UAHViewModel extends ViewModel {
     }
 
     private void loadRate() {
-        RateUseCaseImpl bondUseCase = new RateUseCaseImpl();
-        bondUseCase.setDomainListener(new PresentationListener() {
+        RateUseCaseImpl rateUseCase = new RateUseCaseImpl();
+        rateUseCase.setDomainListener(new PresentationListener() {
 
 
             @Override
